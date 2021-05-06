@@ -8,7 +8,7 @@ let billDetails={};
 products.initProductTable = function () {
     $("#products-datatables").DataTable({
         ajax: {
-            url: "http://localhost:8080/api/products/",
+            url: `http://localhost:8080/api/products/`,
             method: "GET",
             dataType: "json",
             dataSrc: ""
@@ -178,7 +178,7 @@ billDetails.update=function (nameProduct,idProduct){
 
 products.viewProduct = function (id) {
     $.ajax({
-        url: "http://localhost:8080/api/products/" + id,
+        url: `http://localhost:8080/api/products/${id}`,
         method: "GET",
         dataType: "json",
         success: function (data) {
@@ -215,7 +215,7 @@ products.renderProductStatus = function (status) {
 products.innitProductLineTable = function () {
     $("#productLines-datatables").DataTable({
         ajax: {
-            url: "http://localhost:8080/api/productLines",
+            url: `http://localhost:8080/api/productLines`,
             method: "GET",
             dataType: "json",
             dataSrc: ""
@@ -300,7 +300,7 @@ products.resetForm = function () {
 
 products.initProductLines = function () {
     $.ajax({
-        url: "http://localhost:8080/api/productLines/",
+        url: `http://localhost:8080/api/productLines/`,
         method: "GET",
         dataType: "json",
         success: function (data) {
@@ -332,7 +332,7 @@ products.delete = function (id) {
             // console.log(id);
             if (result) {
                 $.ajax({
-                    url: "http://localhost:8080/api/products/" + id,
+                    url: `http://localhost:8080/api/products/${id}`,
                     method: "DELETE",
                     dataType: "json",
                     success: function (data) {
@@ -349,7 +349,7 @@ products.delete = function (id) {
 
 products.get = function (id) {
     $.ajax({
-        url: "http://localhost:8080/api/products/" + id,
+        url: `http://localhost:8080/api/products/${id}`,
         method: "GET",
         dataType: "json",
         success: function (data) {
@@ -399,7 +399,7 @@ products.saveImage = function () {
     let form = new FormData();
     form.append("file", $('#multiImage')[0].files[0]);
     $.ajax({
-        url: "http://localhost:8080/api/upload",
+        url: `http://localhost:8080/api/upload`,
         type: "POST",
         data: form,
         processData: false,
@@ -447,7 +447,7 @@ products.save = function () {
             console.log(productObj);
 
             $.ajax({
-                url: "http://localhost:8080/api/products",
+                url: `http://localhost:8080/api/products`,
                 method: "POST",
                 dataType: "json",
                 contentType: "application/json",
@@ -478,7 +478,7 @@ products.save = function () {
             console.log(productObj);
 
             $.ajax({
-                url: `http://localhost:8080/api/products/${productObj.id}`,
+                url: `${apiUrl}/products/${productObj.id}`,
                 method: "PUT",
                 dataType: "json",
                 contentType: "application/json",
@@ -502,7 +502,7 @@ products.save = function () {
 // lấy ra productline
 productLines.get = function (idProdutLine) {
     $.ajax({
-        url: "http://localhost:8080/api/productLines/" + idProdutLine,
+        url: `http://localhost:8080/api/productLines/${idProdutLine}`,
         method: "GET",
         dataType: "json",
         success: function (data) {
@@ -524,7 +524,7 @@ productLines.save = function () {
         productline.id = Number($('#idProductline-2').val());
 
         $.ajax({
-            url: "http://localhost:8080/api/productLines/" + productline.id,
+            url: `http://localhost:8080/api/productLines/${productline.id}`,
             method: "PUT",
             dataType: "json",
             contentType: "application/json",
@@ -543,7 +543,7 @@ productLines.save = function () {
         let productline = {};
         productline.name = $('#name').val();
         $.ajax({
-            url: "http://localhost:8080/api/productLines",
+            url: `http://localhost:8080/api/productLines`,
             method: "POST",
             dataType: "json",
             contentType: "application/json",
@@ -580,7 +580,7 @@ productLines.delete = function (data) {
         callback: function (result) {
             if (result) {
                 $.ajax({
-                    url: "http://localhost:8080/api/productLines/" + data,
+                    url: `http://localhost:8080/api/productLines/${data}`,
                     method: "DELETE",
                     dataType: "json",
                     succes: function () {

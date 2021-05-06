@@ -10,7 +10,7 @@ let idTableCurrent = 0;
 
 areas.initAreas = function () {
     $.ajax({
-        url: "http://localhost:8080/api/areas/",
+        url: `${apiUrl}/areas/`,
         method: "GET",
         dataType: "json",
         success: function (data) {
@@ -44,7 +44,7 @@ areas.showTables = function (idArea) {
     $('#showOrder').empty().hide();
     $('#showTables').empty().hide();
     $.ajax({
-        url: "http://localhost:8080/api/areas/" + idArea + "/tables",
+        url: `${apiUrl}/areas/${idArea}/tables`,
         method: "GET",
         dataType: "JSON",
         success: function (data) {
@@ -85,7 +85,7 @@ areas.showTables = function (idArea) {
 areas.showMenu = function (idTable) {
     idTableCurrent = idTable;
     $.ajax({
-        url: "http://localhost:8080/api/menu",
+        url: `${apiUrl}/menu`,
         method: "GET",
         dataType: "JSON",
         success: function (data) {
@@ -132,7 +132,7 @@ areas.showMenu = function (idTable) {
 areas.searchProduct = function (idTable) {
     idTableCurrent = idTable;
     $.ajax({
-        url: `http://localhost:8080/api/menu/search=${$('#menu-search-frm').val()}`,
+        url: `${apiUrl}/menu/search=${$('#menu-search-frm').val()}`,
         method: "GET",
         dataType: "JSON",
         success: function (data) {
@@ -211,7 +211,7 @@ tables.showFormAddTable = function (idArea) {
 tables.showFormEditTable = function (idArea,idTable) {
     let commentValue="";
     $.ajax({
-        url:"http://localhost:8080/api/tables/" +idTable,
+        url:`${apiUrl}/tables/${idTable}`,
         method:"GET",
         dataType:"JSON",
         success:function (data){
@@ -277,7 +277,7 @@ function changeBtn(idArea) {
 
 function changeBtnEdit(idArea,idTable){
     $.ajax({
-        url:"http://localhost:8080/api/tables/"+idTable,
+        url:`${apiUrl}/tables/${idTable}`,
         method:"GET",
         dataType:"JSON",
         success:function (data){
@@ -312,7 +312,7 @@ tables.addTable = function (idArea) {
     areaObj.id = idArea;
     tableObj.area = areaObj;
     $.ajax({
-        url: "http://localhost:8080/api/tables/",
+        url: `${apiUrl}/tables/`,
         method: "POST",
         dataType: "JSON",
         contentType: "application/json",
@@ -356,7 +356,7 @@ tables.editTable=function (idArea,idTable){
     tableObj.comment=$('#comment').val();
     console.log(tableObj);
     $.ajax({
-        url:"http://localhost:8080/api/tables/"+idTable,
+        url:`${apiUrl}/tables/${idTable}`,
         method:"PUT",
         dataType: "JSON",
         contentType: "application/json",
@@ -392,7 +392,7 @@ tables.editTable=function (idArea,idTable){
 
 tables.checkTable=function (idArea,idTable){
     $.ajax({
-        url:"http://localhost:8080/api/tables/"+idTable+"/order",
+        url:`${apiUrl}/tables/${idTable}/order`,
         method:"GET",
         dataType:"JSON",
         success:function (data){
@@ -412,7 +412,7 @@ tables.checkTable=function (idArea,idTable){
 
 tables.removeTable=function (idArea,idTable){
     $.ajax({
-        url:"http://localhost:8080/api/tables/"+idTable,
+        url:`${apiUrl}/tables/${idTable}`,
         method:"DELETE",
         dataType:"JSON",
         success:function (){
@@ -435,7 +435,7 @@ tables.usingTable = function (idTable) {
     tableObj.id = idTable;
     tableObj.tableStatus = "USING";
     $.ajax({
-        url: "http://localhost:8080/api/tables/" + idTable + "/tableStatus",
+        url: `${apiUrl}/tables/${idTable}/tableStatus`,
         method: "PUT",
         dataType: "JSON",
         contentType: "application/json",
@@ -451,7 +451,7 @@ tables.emptyTable = function (idTable) {
     tableObj.id = idTable;
     tableObj.tableStatus = "EMPTY";
     $.ajax({
-        url: "http://localhost:8080/api/tables/" + idTable + "/tableStatus",
+        url: `${apiUrl}/tables/${idTable}/tableStatus`,
         method: "PUT",
         dataType: "JSON",
         contentType: "application/json",
@@ -464,7 +464,7 @@ tables.emptyTable = function (idTable) {
 
 tables.showFormAddOrder = function (idTable) {
     $.ajax({
-        url: "http://localhost:8080/api/tables/" + idTable,
+        url: `${apiUrl}/tables/${idTable}`,
         method: "GET",
         dataType: "JSON",
         success: function (data) {
@@ -573,7 +573,7 @@ tables.showFormAddOrder = function (idTable) {
 tables.reloadOrderDetail = function (idOrder, idProduct, idTable) {
     let id = '#showDetail' + idOrder + 'and' + idProduct;
     $.ajax({
-        url: "http://localhost:8080/api/orders/" + idOrder + "/product/" + idProduct + "/orderDetail",
+        url: `${apiUrl}/orders/${idOrder}/product/${idProduct}/orderDetail`,
         method: "GET",
         dataType: "JSON",
         success: function (data) {
@@ -628,7 +628,7 @@ orders.addOrder = function (idTable, idProduct) {
     orderObj.table = tableObj;
     orderObj.account = accountObj;
     $.ajax({
-        url: "http://localhost:8080/api/orders/",
+        url: `${apiUrl}/orders/`,
         method: "POST",
         dataType: "JSON",
         contentType: "application/json",
@@ -644,7 +644,7 @@ orders.addOrder = function (idTable, idProduct) {
 
 orders.getOrder = function (idTable, idProduct) {
     $.ajax({
-        url: "http://localhost:8080/api/tables/" + idTable + "/order",
+        url: `${apiUrl}/tables/${idTable}/order`,
         method: "GET",
         dataType: "JSON",
         success: function (data) {
@@ -655,7 +655,7 @@ orders.getOrder = function (idTable, idProduct) {
 
 orders.getProduct = function (idOrder, idProduct, idTable) {
     $.ajax({
-        url: "http://localhost:8080/api/products/" + idProduct,
+        url: `${apiUrl}/products/${idProduct}`,
         method: "GET",
         dataType: "JSON",
         success: function (data) {
@@ -669,7 +669,7 @@ orders.getProduct = function (idOrder, idProduct, idTable) {
 
 orders.findOrderDetailByIdOrderAndIdProduct = function (idOrder, productObj, idTable) {
     $.ajax({
-        url: "http://localhost:8080/api/orders/" + idOrder + "/product/" + productObj.id + "/orderDetail",
+        url: `${apiUrl}/orders/${idOrder}/product/${productObj.id}/orderDetail`,
         method: "GET",
         dataType: "JSON",
         success: function (data) {
@@ -692,7 +692,7 @@ orders.plusQuantity = function (orderDetail, idTable) {
     orderDetailObj.quantity = orderDetail.quantity + 1;
     orderDetailObj.totalPrice = orderDetailObj.quantity * orderDetail.priceEach;
     $.ajax({
-        url: "http://localhost:8080/api/orders/" + orderObj.id + "/product/" + productObj.id,
+        url: `${apiUrl}/orders/${orderObj.id}/product/${productObj.id}`,
         method: "PUT",
         dataType: "JSON",
         contentType: "application/json",
@@ -733,7 +733,7 @@ orders.addOrderDetail = function (idOrder, productCurrent, idTable) {
     orderDetailObj.priceEach = productCurrent.priceEach;
     orderDetailObj.totalPrice = productCurrent.priceEach * orderDetailObj.quantity;
     $.ajax({
-        url: "http://localhost:8080/api/orderDetails/",
+        url: `${apiUrl}/orderDetails/`,
         method: "POST",
         dataType: "JSON",
         contentType: "application/json",
@@ -764,7 +764,7 @@ orders.addOrderDetail = function (idOrder, productCurrent, idTable) {
 
 orders.updateTotalPriceOrder = function (idTable, idOrder, totalPrice, step, idProduct) {
     $.ajax({
-        url: "http://localhost:8080/api/orders/" + idOrder,
+        url: `${apiUrl}/orders/${idOrder}`,
         method: "GET",
         dataType: "JSON",
         success: function (data) {
@@ -772,7 +772,7 @@ orders.updateTotalPriceOrder = function (idTable, idOrder, totalPrice, step, idP
             orderObj.id = idOrder;
             orderObj.totalAllPrice = totalPrice + data.totalAllPrice;
             $.ajax({
-                url: "http://localhost:8080/api/orders/" + idOrder,
+                url: `${apiUrl}/orders/${idOrder}`,
                 method: "PUT",
                 dataType: "JSON",
                 contentType: "application/json",
@@ -791,12 +791,12 @@ orders.updateTotalPriceOrder = function (idTable, idOrder, totalPrice, step, idP
 
 orders.showOrderAndOrderDetails = function (idTable) {
     $.ajax({
-        url: "http://localhost:8080/api/tables/" + idTable + "/order",
+        url: `${apiUrl}/tables/${idTable}/order`,
         method: "GET",
         dataType: "JSON",
         success: function (data) {
             $.ajax({
-                url: "http://localhost:8080/api/orders/" + data.id + "/orderDetails",
+                url: `${apiUrl}/orders/${data.id}/orderDetails`,
                 method: "GET",
                 dataType: "JSON",
                 success: function (data) {
@@ -862,7 +862,7 @@ orders.updateQuantity = function (idProduct, quantityUpdate, idOrder, priceEach,
     orderDetailObj.quantity = quantityUpdate;
     orderDetailObj.totalPrice = quantityUpdate * priceEach;
     $.ajax({
-        url: "http://localhost:8080/api/orders/" + orderObj.id + "/product/" + productObj.id,
+        url: `${apiUrl}/orders/${orderObj.id}/product/${productObj.id}`,
         method: "PUT",
         dataType: "JSON",
         contentType: "application/json",
@@ -900,7 +900,7 @@ orders.resetQuantity = function (idProduct, quantity) {
 
 orders.removeOrderDetail = function (idOrder, idProduct, idTable) {
     $.ajax({
-        url: "http://localhost:8080/api/orders/" + idOrder + "/product/" + idProduct,
+        url: `${apiUrl}/orders/${idOrder}/product/${idProduct}`,
         method: "DELETE",
         dataType: "JSON",
         success: function (data) {
@@ -930,7 +930,7 @@ orders.removeOrderDetail = function (idOrder, idProduct, idTable) {
 
 orders.checkOrderDetails = function (idOrder, idTable) {
     $.ajax({
-        url: "http://localhost:8080/api/orders/" + idOrder + "/orderDetails",
+        url: `${apiUrl}/orders/${idOrder}/orderDetails`,
         method: "GET",
         dataType: "JSON",
         success: function (data) {
@@ -944,7 +944,7 @@ orders.checkOrderDetails = function (idOrder, idTable) {
 
 orders.removeOrder = function (idOrder, idTable) {
     $.ajax({
-        url: "http://localhost:8080/api/orders/" + idOrder,
+        url: `${apiUrl}/orders/${idOrder}`,
         method: "DELETE",
         dataType: "JSON",
         success: function (data) {
@@ -958,7 +958,7 @@ orders.removeOrder = function (idOrder, idTable) {
 
 bills.addBill = function (idTable) {
     $.ajax({
-        url: "http://localhost:8080/api/tables/" + idTable + "/order",
+        url: `${apiUrl}/tables/${idTable}/order`,
         method: "GET",
         dataType: "JSON",
         success: function (data) {
@@ -968,7 +968,7 @@ bills.addBill = function (idTable) {
             billObj.nameTable = data.table.name;
             billObj.totalPrice = data.totalAllPrice;
             $.ajax({
-                url: "http://localhost:8080/api/bills/",
+                url: `${apiUrl}/bills/`,
                 method: "POST",
                 dataType: "JSON",
                 contentType: "application/json",
@@ -987,7 +987,7 @@ bills.addBill = function (idTable) {
 bills.addBillDetail = function (idOrder, idTable) {
     let arr = [];
     $.ajax({
-        url: "http://localhost:8080/api/orders/" + idOrder + "/orderDetails",
+        url: `${apiUrl}/orders/${idOrder}/orderDetails`,
         method: "GET",
         dataType: "JSON",
         success: function (data) {
@@ -1008,7 +1008,7 @@ bills.addBillDetail = function (idOrder, idTable) {
 bills.doAddBillDetails = function (arr, idOrder, idTable) {
     $.each(arr, function (i, v) {
         $.ajax({
-            url: "http://localhost:8080/api/billDetails/",
+            url: `${apiUrl}/billDetails/`,
             method: "POST",
             dataType: "JSON",
             contentType: "application/json",
@@ -1022,13 +1022,13 @@ bills.doAddBillDetails = function (arr, idOrder, idTable) {
 
 bills.addQuantitativeExport=function (idOrder,idTable){
     $.ajax({
-        url:"http://localhost:8080/api/billDetails/"+idOrder+"/quantitativeExports",
+        url:`${apiUrl}/billDetails/${idOrder}/quantitativeExports`,
         method:"GET",
         dataType:"JSON",
         success:function (data){
             $.each(data,function (i,v){
                 $.ajax({
-                    url:"http://localhost:8080/api/quantitativeExports/",
+                    url:`${apiUrl}/quantitativeExports/`,
                     method:"POST",
                     contentType: "application/json",
                     data: JSON.stringify(v),
@@ -1044,7 +1044,7 @@ bills.addQuantitativeExport=function (idOrder,idTable){
 
 bills.addProductExport=function (idOrder,idTable){
     $.ajax({
-        url:"http://localhost:8080/api/billDetails/"+idOrder+"/productExports",
+        url:`${apiUrl}/billDetails/${idOrder}/productExports`,
         method :"GET",
         dataType:"JSON",
         success:function (data){
@@ -1052,7 +1052,7 @@ bills.addProductExport=function (idOrder,idTable){
             $.each(data,function (i,v){
                 console.log(v);
                 $.ajax({
-                    url:"http://localhost:8080/api/productExports/",
+                    url:`${apiUrl}/productExports/`,
                     method:"POST",
                     contentType: "application/json",
                     data: JSON.stringify(v),
@@ -1068,7 +1068,7 @@ bills.addProductExport=function (idOrder,idTable){
 
 bills.getBillDetails=function (idOrder,idTable){
     $.ajax({
-        url:"http://localhost:8080/api/billDetails/"+idOrder,
+        url:`${apiUrl}/billDetails/${idOrder}`,
         method:"GET",
         dataType:"JSON",
         success:function (data){
@@ -1082,7 +1082,7 @@ bills.getBillDetails=function (idOrder,idTable){
 
 bills.checkProduct=function (idProduct,quantityOrder){
     $.ajax({
-        url:"http://localhost:8080/api/products/"+idProduct,
+        url:`${apiUrl}/products/${idProduct}`,
         method:"GET",
         dataType:"JSON",
         success:function (data){
@@ -1098,7 +1098,7 @@ bills.updateInventory=function (inventoryCurrent,idProduct,quantityOrder){
     productObj.inventory=inventoryCurrent-quantityOrder;
     productObj.id=idProduct;
     $.ajax({
-        url:"http://localhost:8080/api/products/"+idProduct+"/inventory",
+        url:`${apiUrl}/products/${idProduct}/inventory`,
         method:"PUT",
         contentType: "application/json",
         data: JSON.stringify(productObj),
@@ -1110,7 +1110,7 @@ bills.updateInventory=function (inventoryCurrent,idProduct,quantityOrder){
 
 bills.removeAllOrderDetails = function (idOrder, idTable) {
     $.ajax({
-        url: "http://localhost:8080/api/orders/" + idOrder + "/orderDetails",
+        url: `${apiUrl}/orders/${idOrder}/orderDetails`,
         method: "DELETE",
         dataType: "JSON",
         success: function (data) {
