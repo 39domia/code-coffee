@@ -20,7 +20,7 @@ public class QuantitativeRestController {
     @GetMapping
     public ResponseEntity<?> list(){
         List<Quantitative> quantitativeList=quantitativeService.findAll();
-        if(quantitativeList.size() == 0){
+        if(quantitativeList.size() != 0){
             return new ResponseEntity<>(quantitativeList, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

@@ -294,7 +294,7 @@ products.resetForm = function () {
     $('#inventory').val('');
     $('#image').val('');
     $('#price').val('');
-    $('#productLine.name').val('');
+    // $('#productLine.name').val('');
 
 };
 

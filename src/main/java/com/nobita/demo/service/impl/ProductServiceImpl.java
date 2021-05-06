@@ -42,6 +42,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<Product> findAllIngredient() {
+        return productDAO.findAllIngredient();
+    }
+
+    @Override
     public List<Product> findByProductLineAndProductName(Long idProductLine, String nameProduct) {
         return productDAO.findByProductLineAndProductName(idProductLine, nameProduct);
     }

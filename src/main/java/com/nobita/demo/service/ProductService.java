@@ -17,4 +17,5 @@ public interface ProductService extends BaseService<Product> {
 
     public boolean updateInventory(Product product);
 
+    public List<Product> findAllIngredient();
 }

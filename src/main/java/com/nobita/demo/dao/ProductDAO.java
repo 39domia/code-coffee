@@ -25,6 +25,11 @@ public class ProductDAO implements BaseDAO<Product> {
         return jdbcTemplate.query(sql, new ProductResultSet());
     }
 
+    public List<Product> findAllIngredient() {
+        String sql = "select p.* ,pl.name as name_productline from product p left join productline pl on pl.id =p.id_productline where p.is_ingredient=1 and p.deleted=0";
+        return jdbcTemplate.query(sql, new ProductResultSet());
+    }
+
     @Override
     public Product findByID(Long id) {
         String sql = "select p.* ,pl.name as name_productline from product p left join productline pl on pl.id =p.id_productline where p.id=? and p.deleted=0";

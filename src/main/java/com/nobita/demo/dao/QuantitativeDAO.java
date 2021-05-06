@@ -16,7 +16,7 @@ public class QuantitativeDAO implements BaseDAO<Quantitative> {
 
     @Override
     public List<Quantitative> findAll() {
-        String sql = "select q.*,p.name as name_product,i.name as name_ingredient from quantitative q left join product p on p.id=q.id_product left join ingredient i in i.id=q.id_ingredient";
+        String sql = "select q.*,p.name as name_product,i.name as name_ingredient from quantitative q left join product p on p.id=q.id_product left join ingredient i on i.id=q.id_ingredient";
         return jdbcTemplate.query(sql, new QuantitativeResultSet());
     }
 
@@ -26,7 +26,7 @@ public class QuantitativeDAO implements BaseDAO<Quantitative> {
     }
 
     public Quantitative findByIdProductAndIdIngredient(Long idProduct, Long idIngredient) {
-        String sql = "select q.*,p.name as name_product,i.name as name_ingredient from quantitative q left join product p on p.id=q.id_product left join ingredient i in i.id=q.id_ingredient where q.id_product =? and q.id_ingredient =?";
+        String sql = "select q.*,p.name as name_product,i.name as name_ingredient from quantitative q left join product p on p.id=q.id_product left join ingredient i on i.id=q.id_ingredient where q.id_product =? and q.id_ingredient =?";
         Object[] values = {idProduct, idIngredient};
         return jdbcTemplate.queryForObject(sql, new QuantitativeRowMapper(), values);
     }

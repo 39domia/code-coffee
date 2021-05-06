@@ -48,6 +48,15 @@ public class ProductRestController {
         return new ResponseEntity<List<Product>>(HttpStatus.NO_CONTENT);
     }
 
+    @GetMapping(value = "/isIngredient",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> listIngredient(){
+        List<Product> products = productService.findAllIngredient();
+        if (!products.isEmpty()) {
+            return new ResponseEntity<>(products, HttpStatus.OK);
+        }
+        return new ResponseEntity<List<Product>>(HttpStatus.NO_CONTENT);
+    }
+
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> get(@PathVariable("id") Long id) {
         Product product = productService.findByID(id);
