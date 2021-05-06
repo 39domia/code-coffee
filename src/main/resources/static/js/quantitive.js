@@ -1,12 +1,9 @@
 let quantitative = {};
 
-let quantitativeAddObj = {};
-
-
 quantitative.initQuantitativeTable = function () {
     $("#quantitative-datatables").DataTable({
         ajax: {
-            url: "http://localhost:8080/api/quantitatives/",
+            url: `http://localhost:8080/api/quantitatives/`,
             method: "GET",
             dataType: "json",
             dataSrc: ""
@@ -21,7 +18,7 @@ quantitative.initQuantitativeTable = function () {
             {data: "quantity", name: "quantity", title: "Số lượng"},
             {
                 title: "Chức năng", orderable: false,
-                "render": function (data, type, row, meta) {
+                "render": function (data, type, row) {
                     return `
                     <a class='mr-2' href='javascript:;' title='Chỉnh sửa' onclick='quantitative.get(${row.product.id}, ${row.ingredient.id})'><i class='fa fa-edit'></i></a> 
                     <a class='mr-2' href='javascript:;' title='Xóa' onclick='quantitative.delete(${row.product.id}, ${row.ingredient.id})' ><i class='fa fa-trash'></i></a>
@@ -50,7 +47,7 @@ quantitative.initQuantitativeTable = function () {
 
 quantitative.initProductsAndIngredients = function () {
     $.ajax({
-        url: "http://localhost:8080/api/products/isIngredient",
+        url: `http://localhost:8080/api/products/isIngredient`,
         method: "GET",
         dataType: "json",
         success: function (data) {
@@ -63,7 +60,7 @@ quantitative.initProductsAndIngredients = function () {
         }
     });
     $.ajax({
-        url: "http://localhost:8080/api/ingredients",
+        url: `http://localhost:8080/api/ingredients`,
         method: "GET",
         dataType: "json",
         success: function (data) {
@@ -86,21 +83,17 @@ quantitative.addNew = function () {
 
 quantitative.resetForm = function () {
     $('#formAddEditQuantitative')[0].reset();
-    // $('#productName').val('');
-    // $('#inventory').val('');
-    // $('#image').val('');
-    // $('#price').val('');
-    // $('#productLine.name').val('');
-
 };
 
-quantitative.findProductById = function (idProduct) {
+quantitative.findProductById = function (idProduct,quantitativeAddObj) {
     $.ajax({
         url: `http://localhost:8080/api/products/${idProduct}`,
+        async: false,
         method: "GET",
         dataType: "json",
         success: function (data) {
             quantitativeAddObj.product = data;
+            console.log(quantitativeAddObj);
         },
         error: function () {
             toastr.error("Lỗi tìm sản phẩm");
@@ -108,9 +101,10 @@ quantitative.findProductById = function (idProduct) {
     });
 };
 
-quantitative.findIngredientById = function (idIngredient) {
+quantitative.findIngredientById = function (idIngredient, quantitativeAddObj) {
     $.ajax({
         url: `http://localhost:8080/api/ingredients/${idIngredient}`,
+        async: false,
         method: "GET",
         dataType: "json",
         success: function (data) {
@@ -126,9 +120,9 @@ quantitative.findIngredientById = function (idIngredient) {
 quantitative.save = function (){
     if ($("#formAddEditQuantitative")) {
         if (!$('#id').val()) {
-            quantitativeAddObj = {};
-            quantitative.findProductById(Number($('#productNameQuantitative').val()));
-            quantitative.findIngredientById(Number($('#ingredientNameQuantitative').val()));
+            let quantitativeAddObj = {};
+            quantitative.findProductById(Number($('#productNameQuantitative').val()), quantitativeAddObj);
+            quantitative.findIngredientById(Number($('#ingredientNameQuantitative').val()),quantitativeAddObj);
             quantitativeAddObj.quantity = Number($('#quantityQuantitative').val());
             console.log(quantitativeAddObj);
             $.ajax({
@@ -137,9 +131,9 @@ quantitative.save = function (){
                 dataType: "json",
                 contentType: "application/json",
                 data: JSON.stringify(quantitativeAddObj),
-                success: function (data) {
+                success: function () {
                     toastr.success("Thêm mới thành công");
-                    $('#modalTitleQuantitative').modal('hide');
+                    $('#modalAddEditQuantitative').modal('hide');
                     $("#quantitative-datatables").DataTable().ajax.reload();
                 },
                 error: function () {

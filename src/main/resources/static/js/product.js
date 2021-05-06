@@ -282,6 +282,7 @@ products.addNew = function () {
     $('#modalTitle').html("Thêm sản phẩm mới");
     products.resetForm();
     $('#isIngredient').prop("disabled", false);
+    $('#isIngredient option:selected').html("Nguyên liệu pha chế");
     $('#modalAddEdit').modal('show')
 }
 
@@ -329,13 +330,30 @@ products.delete = function (id) {
             }
         },
         callback: function (result) {
-            // console.log(id);
             if (result) {
                 $.ajax({
                     url: `http://localhost:8080/api/products/${id}`,
                     method: "DELETE",
                     dataType: "json",
                     success: function (data) {
+                        Command: toastr["success"]("Xóa sản phẩm thành công");
+                        toastr.options = {
+                            "closeButton": false,
+                            "debug": false,
+                            "newestOnTop": false,
+                            "progressBar": true,
+                            "positionClass": "toast-top-right",
+                            "preventDuplicates": false,
+                            "onclick": null,
+                            "showDuration": "300",
+                            "hideDuration": "1000",
+                            "timeOut": "2000",
+                            "extendedTimeOut": "1000",
+                            "showEasing": "swing",
+                            "hideEasing": "linear",
+                            "showMethod": "fadeIn",
+                            "hideMethod": "fadeOut"
+                        };
                         $('#modalAddEdit').modal('hide');
                         $("#products-datatables").DataTable().ajax.reload();
                         // importProducts.initImportProductTable();
@@ -405,8 +423,6 @@ products.saveImage = function () {
         processData: false,
         contentType: false,
         success: function (data) {
-            // products.resetForm();
-            // $('#formAddEdit')[0].reset();
             $("#imgUrl").val(data.url);
             $("#done-upload").html(
                 `<img src="${data.url}" alt="Ảnh sản phẩm" style="max-width: 300px; max-height: 300px; width: 100%; height: 100%" class="img-thumbnail">`
@@ -435,7 +451,7 @@ products.save = function () {
             productObj.name = $('#productName').val();
             productObj.price = Number($('#price').val());
             productObj.image = $('#imgUrl').val();
-            productObj.ingredient = $('#isIngredient').val() === true;
+            productObj.ingredient = Boolean($('#isIngredient').val()) === true;
             productObj.inventory = 0;
             productObj.inventory = products.setInventory(productObj);
             productObj.productStatus = products.setProductStatus(productObj.inventory, productObj);
