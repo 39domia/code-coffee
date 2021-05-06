@@ -45,6 +45,11 @@ public class QuantitativeServiceImpl implements QuantitativeService {
 
     @Override
     public boolean updateByIdProductAndIdIngredient(Quantitative quantitative, Long idProduct, Long idIngredient) {
-        return quantitativeDAO.updateByIdProductAndIdIngredient(quantitative,idProduct,idIngredient);
+        return quantitativeDAO.updateByIdProductAndIdIngredient(quantitative, idProduct, idIngredient);
+    }
+
+    @Override
+    public boolean deleteByIdProductAndIdIngredient(Long idProduct, Long idIngredient) {
+        return quantitativeDAO.deleteByIdProductAndIdIngredient(idProduct,idIngredient);
     }
 }
