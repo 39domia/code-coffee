@@ -17,9 +17,9 @@ public class ReportController {
         return "report-bill";
     }
 
-    @GetMapping(value = "/stores")
+    @GetMapping(value = "/inventories")
     public String showReportStore() {
-        return "/report-store";
+        return "/report-inventory";
     }
 
     @GetMapping(value = "/ingredients")

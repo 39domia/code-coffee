@@ -20,6 +20,7 @@ public class QuantitativeExportResultSet implements ResultSetExtractor<List<Quan
             quantitativeExport.setNameProduct(rs.getString("name_product"));
             quantitativeExport.setNameIngredient(rs.getString("name_ingredient"));
             quantitativeExport.setQuantity(rs.getDouble("quantity"));
+            quantitativeExport.setIdIngredient(rs.getLong("id_ingredient"));
             quantitativeExports.add(quantitativeExport);
         }
         return quantitativeExports;

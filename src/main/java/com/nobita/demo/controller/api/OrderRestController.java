@@ -14,6 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -57,7 +58,7 @@ public class OrderRestController {
     }
 
     @PostMapping
-    public ResponseEntity<?> save(@RequestBody Order order) {
+    public ResponseEntity<?> save(@RequestBody Order order, Principal principal) {
         try {
             Order orderCurrent = orderService.findByTable(order.getTable().getId());
             return new ResponseEntity<>(orderCurrent, HttpStatus.INTERNAL_SERVER_ERROR);
