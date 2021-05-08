@@ -21,7 +21,7 @@ public class ProductExportDAO implements BaseDAO<ProductExport> {
     }
 
     public List<ProductExport> findAllByDateExport(String dateIn,String dateOut) {
-        String sql = "select max(px.id) as id,max(px.date_export) as date_export,name_product,sum(px.quantity) as quantity,px.id_product as id_product from product_export px where px.date_export > ? and px.date_export < ? group by px.name_product";
+        String sql = "select max(px.id) as id,max(px.date_export) as date_export,name_product,sum(px.quantity) as quantity,px.price_each as price_each,px.id_product as id_product from product_export px where px.date_export > ? and px.date_export < ? group by px.name_product";
         Object[] values = {dateIn, dateOut};
         return jdbcTemplate.query(sql,new ProductExportResultSet(),values);
     }
@@ -35,8 +35,8 @@ public class ProductExportDAO implements BaseDAO<ProductExport> {
 
     @Override
     public boolean save(ProductExport productExport) {
-        String sql="insert into product_export (date_export,name_product,quantity,id_product) values (?,?,?,?)";
-        Object[] values={productExport.getDateExport(),productExport.getNameProduct(),productExport.getQuantity(),productExport.getIdProduct()};
+        String sql="insert into product_export (date_export,name_product,quantity,price_each,id_product) values (?,?,?,?,?)";
+        Object[] values={productExport.getDateExport(),productExport.getNameProduct(),productExport.getQuantity(),productExport.getPriceEach(),productExport.getIdProduct()};
         return jdbcTemplate.update(sql,values) > 0;
     }
 

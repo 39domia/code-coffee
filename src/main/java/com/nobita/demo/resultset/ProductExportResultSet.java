@@ -18,6 +18,7 @@ public class ProductExportResultSet implements ResultSetExtractor<List<ProductEx
             productExport.setDateExport(rs.getTimestamp("date_export").toLocalDateTime());
             productExport.setNameProduct(rs.getString("name_product"));
             productExport.setQuantity(rs.getLong("quantity"));
+            productExport.setPriceEach(rs.getLong("price_each"));
             productExport.setIdProduct(rs.getLong("id_product"));
             productExports.add(productExport);
         }

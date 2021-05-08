@@ -33,8 +33,8 @@ public class QuantitativeExportDAO implements BaseDAO<QuantitativeExport> {
 
     @Override
     public boolean save(QuantitativeExport quantitativeExport) {
-        String sql = "insert into quantitative_export(date_export,name_product,name_ingredient,quantity) values (?,?,?,?)";
-        Object[] values = {quantitativeExport.getDateExport(), quantitativeExport.getNameProduct(), quantitativeExport.getNameIngredient(), quantitativeExport.getQuantity()};
+        String sql = "insert into quantitative_export(date_export,name_product,name_ingredient,quantity,id_ingredient) values (?,?,?,?,?)";
+        Object[] values = {quantitativeExport.getDateExport(), quantitativeExport.getNameProduct(), quantitativeExport.getNameIngredient(), quantitativeExport.getQuantity(),quantitativeExport.getIdIngredient()};
         return jdbcTemplate.update(sql, values) > 0;
     }
 

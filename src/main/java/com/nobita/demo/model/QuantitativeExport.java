@@ -12,4 +12,5 @@ public class QuantitativeExport {
     private String nameProduct;
     private String nameIngredient;
     private Double quantity;
+    private Long idIngredient;
 }
