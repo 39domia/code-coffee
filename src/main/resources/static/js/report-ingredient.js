@@ -1,6 +1,6 @@
-let reportIngredients ={};
+let reportIngredients = {};
 
-reportIngredients.showDatatable=function (){
+reportIngredients.showDatatable = function () {
     $('#report-ingredient').empty().append(
         `<h1 class="h3 mb-2 text-gray-800">Báo cáo nguyên liệu</h1>
          <p class="mb-4"></p>
@@ -70,21 +70,21 @@ reportIngredients.showDatatable=function (){
     reportIngredients.showIngredientExport();
 };
 
-reportIngredients.showIngredientExport=function (){
-    let dateObj={};
-    dateObj.dateIn=$('#test-time1').val();
-    dateObj.dateOut=$('#test-time2').val();
+reportIngredients.showIngredientExport = function () {
+    let dateObj = {};
+    dateObj.dateIn = $('#test-time1').val();
+    dateObj.dateOut = $('#test-time2').val();
     console.log(dateObj);
     $.ajax({
-        url:"http://localhost:8080/api/quantitativeExports/dateExport",
-        method:"POST",
-        dataType:"JSON",
+        url: `${apiUrl}/quantitativeExports/dateExport`,
+        method: "POST",
+        dataType: "JSON",
         contentType: "application/json",
         data: JSON.stringify(dateObj),
-        success:function (data){
+        success: function (data) {
             console.log(data);
             $('#list-ingredientExport').empty();
-            $.each(data,function (i,v){
+            $.each(data, function (i, v) {
                 $('#list-ingredientExport').append(
                     `<tr>
                         <td colspan="3">${v.nameIngredient}</td>
@@ -97,6 +97,6 @@ reportIngredients.showIngredientExport=function (){
 };
 
 $(document).ready(function () {
-    reportIngredients.showDatatable();
+        reportIngredients.showDatatable();
     }
 );

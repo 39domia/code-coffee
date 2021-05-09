@@ -8,7 +8,7 @@ let billDetails={};
 products.initProductTable = function () {
     $("#products-datatables").DataTable({
         ajax: {
-            url: `http://localhost:8080/api/products/`,
+            url: `${apiUrl}/products/`,
             method: "GET",
             dataType: "json",
             dataSrc: ""
@@ -96,7 +96,7 @@ products.renderProductStatusButton = function (data, row) {
 
 products.switchProductStatusButton = function (id) {
     $.ajax({
-        url: `http://localhost:8080/api/products/${id}`,
+        url: `${apiUrl}/products/${id}`,
         method: "GET",
         dataType: "json",
         success: function (data) {
@@ -128,7 +128,7 @@ products.switchProductStatusButton = function (id) {
 
 products.updateProduct = function (product, id) {
     $.ajax({
-        url: `http://localhost:8080/api/products/${id}`,
+        url: `${apiUrl}/products/${id}`,
         method: "PUT",
         dataType: "json",
         contentType: "application/json",
@@ -149,7 +149,7 @@ productExports.update=function (nameProduct,idProduct){
     productExportObj.nameProduct=nameProduct;
     console.log(productExportObj);
     $.ajax({
-        url:`http://localhost:8080/api/productExports/${idProduct}`,
+        url:`${apiUrl}/productExports/${idProduct}`,
         method:"PUT",
         dataType: "json",
         contentType: "application/json",
@@ -165,7 +165,7 @@ billDetails.update=function (nameProduct,idProduct){
     billDetailsObj.nameProduct=nameProduct;
     console.log(billDetailsObj);
     $.ajax({
-        url:`http://localhost:8080/api/billDetails/${idProduct}`,
+        url:`${apiUrl}/billDetails/${idProduct}`,
         method:"PUT",
         dataType: "json",
         contentType: "application/json",
@@ -178,7 +178,7 @@ billDetails.update=function (nameProduct,idProduct){
 
 products.viewProduct = function (id) {
     $.ajax({
-        url: `http://localhost:8080/api/products/${id}`,
+        url: `${apiUrl}/products/${id}`,
         method: "GET",
         dataType: "json",
         success: function (data) {
@@ -215,7 +215,7 @@ products.renderProductStatus = function (status) {
 products.innitProductLineTable = function () {
     $("#productLines-datatables").DataTable({
         ajax: {
-            url: `http://localhost:8080/api/productLines`,
+            url: `${apiUrl}/productLines`,
             method: "GET",
             dataType: "json",
             dataSrc: ""
@@ -301,7 +301,7 @@ products.resetForm = function () {
 
 products.initProductLines = function () {
     $.ajax({
-        url: `http://localhost:8080/api/productLines/`,
+        url: `${apiUrl}/productLines/`,
         method: "GET",
         dataType: "json",
         success: function (data) {
@@ -332,7 +332,7 @@ products.delete = function (id) {
         callback: function (result) {
             if (result) {
                 $.ajax({
-                    url: `http://localhost:8080/api/products/${id}`,
+                    url: `${apiUrl}/products/${id}`,
                     method: "DELETE",
                     dataType: "json",
                     success: function (data) {
@@ -367,7 +367,7 @@ products.delete = function (id) {
 
 products.get = function (id) {
     $.ajax({
-        url: `http://localhost:8080/api/products/${id}`,
+        url: `${apiUrl}/products/${id}`,
         method: "GET",
         dataType: "json",
         success: function (data) {
@@ -417,7 +417,7 @@ products.saveImage = function () {
     let form = new FormData();
     form.append("file", $('#multiImage')[0].files[0]);
     $.ajax({
-        url: `http://localhost:8080/api/upload`,
+        url: `${apiUrl}/upload`,
         type: "POST",
         data: form,
         processData: false,
@@ -463,7 +463,7 @@ products.save = function () {
             console.log(productObj);
 
             $.ajax({
-                url: `http://localhost:8080/api/products`,
+                url: `${apiUrl}/products`,
                 method: "POST",
                 dataType: "json",
                 contentType: "application/json",
@@ -518,7 +518,7 @@ products.save = function () {
 // lấy ra productline
 productLines.get = function (idProdutLine) {
     $.ajax({
-        url: `http://localhost:8080/api/productLines/${idProdutLine}`,
+        url: `${apiUrl}/productLines/${idProdutLine}`,
         method: "GET",
         dataType: "json",
         success: function (data) {
@@ -540,7 +540,7 @@ productLines.save = function () {
         productline.id = Number($('#idProductline-2').val());
 
         $.ajax({
-            url: `http://localhost:8080/api/productLines/${productline.id}`,
+            url: `${apiUrl}/productLines/${productline.id}`,
             method: "PUT",
             dataType: "json",
             contentType: "application/json",
@@ -559,7 +559,7 @@ productLines.save = function () {
         let productline = {};
         productline.name = $('#name').val();
         $.ajax({
-            url: `http://localhost:8080/api/productLines`,
+            url: `${apiUrl}/productLines`,
             method: "POST",
             dataType: "json",
             contentType: "application/json",
@@ -596,7 +596,7 @@ productLines.delete = function (data) {
         callback: function (result) {
             if (result) {
                 $.ajax({
-                    url: `http://localhost:8080/api/productLines/${data}`,
+                    url: `${apiUrl}/productLines/${data}`,
                     method: "DELETE",
                     dataType: "json",
                     succes: function () {

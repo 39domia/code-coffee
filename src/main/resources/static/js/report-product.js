@@ -1,6 +1,6 @@
-let reportProducts ={};
+let reportProducts = {};
 
-reportProducts.showDatatable=function (){
+reportProducts.showDatatable = function () {
     $('#report-product').empty().append(
         `<h1 class="h3 mb-2 text-gray-800">Báo cáo sản phẩm</h1>
          <p class="mb-4"></p>
@@ -90,22 +90,22 @@ reportProducts.showDatatable=function (){
     reportProducts.showProductExport();
 };
 
-reportProducts.showProductExport=function (){
-    let sum=0;
-    let dateObj={};
-    dateObj.dateIn=$('#test-time1').val();
-    dateObj.dateOut=$('#test-time2').val();
+reportProducts.showProductExport = function () {
+    let sum = 0;
+    let dateObj = {};
+    dateObj.dateIn = $('#test-time1').val();
+    dateObj.dateOut = $('#test-time2').val();
     console.log(dateObj);
     $.ajax({
-        url:"http://localhost:8080/api/productExports/dateExport",
-        method:"POST",
-        dataType:"JSON",
+        url: `${apiUrl}/productExports/dateExport`,
+        method: "POST",
+        dataType: "JSON",
         contentType: "application/json",
         data: JSON.stringify(dateObj),
-        success:function (data){
+        success: function (data) {
             console.log(data);
             $('#list-productExport').empty();
-            $.each(data,function (i,v){
+            $.each(data, function (i, v) {
                 sum += v.quantity * v.priceEach;
                 $('#list-productExport').append(
                     `<tr>

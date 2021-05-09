@@ -1,6 +1,6 @@
-let reportInventoryIngredients={};
+let reportInventoryIngredients = {};
 
-reportInventoryIngredients.showDatatable=function (){
+reportInventoryIngredients.showDatatable = function () {
     $('#report-inventory-ingredient').empty().append(
         `<h1 class="h3 mb-2 text-gray-800">Báo cáo tồn kho</h1>
          <p class="mb-4"></p>
@@ -72,21 +72,21 @@ reportInventoryIngredients.showDatatable=function (){
     reportInventoryIngredients.showInventory();
 }
 
-reportInventoryIngredients.showInventory=function (){
-    let dateObj={};
-    dateObj.dateIn=$('#test-time1').val();
-    dateObj.dateOut=$('#test-time2').val();
+reportInventoryIngredients.showInventory = function () {
+    let dateObj = {};
+    dateObj.dateIn = $('#test-time1').val();
+    dateObj.dateOut = $('#test-time2').val();
     console.log(dateObj);
     $.ajax({
-        url:"http://localhost:8080/api/quantitativeInventories/dateExport",
-        method:"POST",
-        dataType:"JSON",
+        url: `${apiUrl}/quantitativeInventories/dateExport`,
+        method: "POST",
+        dataType: "JSON",
         contentType: "application/json",
         data: JSON.stringify(dateObj),
-        success:function (data){
+        success: function (data) {
             console.log(data);
             $('#list-ingredientExport').empty();
-            $.each(data,function (i,v){
+            $.each(data, function (i, v) {
                 $('#list-ingredientInventory').append(
                     `<tr>
                         <td colspan="3">${v.nameIngredient}</td>
