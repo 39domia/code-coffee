@@ -3,7 +3,7 @@ let quantitative = {};
 quantitative.initQuantitativeTable = function () {
     $("#quantitative-datatables").DataTable({
         ajax: {
-            url: `http://localhost:8080/api/quantitatives/`,
+            url: `${apiUrl}/quantitatives/`,
             method: "GET",
             dataType: "json",
             dataSrc: ""
@@ -47,7 +47,7 @@ quantitative.initQuantitativeTable = function () {
 
 quantitative.initProductsAndIngredients = function () {
     $.ajax({
-        url: `http://localhost:8080/api/products/isIngredient`,
+        url: `${apiUrl}/products/isIngredient`,
         method: "GET",
         dataType: "json",
         success: function (data) {
@@ -60,7 +60,7 @@ quantitative.initProductsAndIngredients = function () {
         }
     });
     $.ajax({
-        url: `http://localhost:8080/api/ingredients`,
+        url: `${apiUrl}/ingredients`,
         method: "GET",
         dataType: "json",
         success: function (data) {
@@ -87,7 +87,7 @@ quantitative.resetForm = function () {
 
 quantitative.findProductById = function (idProduct,quantitativeAddObj) {
     $.ajax({
-        url: `http://localhost:8080/api/products/${idProduct}`,
+        url: `${apiUrl}/products/${idProduct}`,
         async: false,
         method: "GET",
         dataType: "json",
@@ -103,7 +103,7 @@ quantitative.findProductById = function (idProduct,quantitativeAddObj) {
 
 quantitative.findIngredientById = function (idIngredient, quantitativeAddObj) {
     $.ajax({
-        url: `http://localhost:8080/api/ingredients/${idIngredient}`,
+        url: `${apiUrl}/ingredients/${idIngredient}`,
         async: false,
         method: "GET",
         dataType: "json",
@@ -126,7 +126,7 @@ quantitative.save = function (){
             quantitativeAddObj.quantity = Number($('#quantityQuantitative').val());
             console.log(quantitativeAddObj);
             $.ajax({
-                url: `http://localhost:8080/api/quantitatives/`,
+                url: `${apiUrl}/quantitatives/`,
                 method: "POST",
                 dataType: "json",
                 contentType: "application/json",
@@ -157,7 +157,7 @@ quantitative.save = function (){
             console.log(productObj);
 
             $.ajax({
-                url: `http://localhost:8080/api/products/${productObj.id}`,
+                url: `${apiUrl}/products/${productObj.id}`,
                 method: "PUT",
                 dataType: "json",
                 contentType: "application/json",
@@ -180,7 +180,7 @@ quantitative.save = function (){
 
 // quantitative.get = function (idProduct, idIngredient) {
 //     $.ajax({
-//         url: `http://localhost:8080/api/quantitatives/product/${idProduct}/ingredient/${idIngredient}/`,
+//         url: `${apiUrl}/quantitatives/product/${idProduct}/ingredient/${idIngredient}/`,
 //         method: "GET",
 //         dataType: "json",
 //         success: function (data) {

@@ -4,7 +4,7 @@ let product = {};
 importProducts.initImportProductTable = function () {
     $("#importProducts-datatables").DataTable({
         ajax: {
-            url: `http://localhost:8080/api/importProducts/`,
+            url: `${apiUrl}/importProducts/`,
             method: "GET",
             dataType: "json",
             dataSrc: ""
@@ -61,7 +61,7 @@ importProducts.resetForm = function () {
 importProducts.get = function (id) {
     // console.log('get :' + id);
     $.ajax({
-        url: `http://localhost:8080/api/importProducts/${id}`,
+        url: `${apiUrl}/importProducts/${id}`,
         method: "GET",
         dataType: "json",
         success: function (data) {
@@ -84,7 +84,7 @@ importProducts.get = function (id) {
 
 importProducts.initProduct = function (data) {
     $.ajax({
-        url: `http://localhost:8080/api/products/notIngredient`,
+        url: `${apiUrl}/products/notIngredient`,
         method: "GET",
         dataType: "json",
         success: function (data) {
@@ -103,7 +103,7 @@ importProducts.save = function () {
     if ($('#formAddEdit')) {
         if (!$('#id').val()) {
             $.ajax({
-                url: `http://localhost:8080/api/products/${Number($("#products").val())}`,
+                url: `${apiUrl}/products/${Number($("#products").val())}`,
                 method: "GET",
                 dataType: "json",
                 success: function (data) {
@@ -119,7 +119,7 @@ importProducts.save = function () {
                     importProductObj.product = productObj;
 
                     $.ajax({
-                        url: `http://localhost:8080/api/importProducts/`,
+                        url: `${apiUrl}/importProducts/`,
                         method: "POST",
                         dataType: "json",
                         contentType: "application/json",
@@ -140,7 +140,7 @@ importProducts.save = function () {
 
         } else {
             $.ajax({
-                url: `http://localhost:8080/api/products/${Number($("#products").val())}`,
+                url: `${apiUrl}/products/${Number($("#products").val())}`,
                 method: "GET",
                 dataType: "json",
                 success: function (data) {
@@ -159,7 +159,7 @@ importProducts.save = function () {
                     importProductObj.product = productObj;
 
                     $.ajax({
-                        url: `http://localhost:8080/api/importProducts/${importProductObj.id}`,
+                        url: `${apiUrl}/importProducts/${importProductObj.id}`,
                         method: "PUT",
                         dataType: "json",
                         contentType: "application/json",
@@ -182,7 +182,7 @@ importProducts.save = function () {
 
 function deleteImportProduct(id) {
     $.ajax({
-        url: `http://localhost:8080/api/importProducts/${id}`,
+        url: `${apiUrl}/importProducts/${id}`,
         method: "DELETE",
         dataType: "json",
         success: function (data) {
@@ -209,7 +209,7 @@ importProducts.delete = function (id) {
         callback: function (result) {
             if (result) {
                 $.ajax({
-                    url: `http://localhost:8080/api/importProducts/${id}`,
+                    url: `${apiUrl}/importProducts/${id}`,
                     method: "GET",
                     dataType: "json",
                     success: function (data) {

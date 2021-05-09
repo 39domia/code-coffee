@@ -4,7 +4,7 @@ let units = {};
 ingredients.initIngredients = function () {
     $("#ingredients-datatables").DataTable({
         ajax: {
-            url: `http://localhost:8080/api/ingredients`,
+            url: `${apiUrl}/ingredients`,
             method: "GET",
             dataType: "json",
             dataSrc: ""
@@ -51,7 +51,7 @@ ingredients.addNew = function () {
 // list unit
 ingredients.initListUnit = function () {
     $.ajax({
-        url: `http://localhost:8080/api/units`,
+        url: `${apiUrl}/units`,
         method: "GET",
         dataType: "json",
         success: function (data) {
@@ -69,7 +69,7 @@ ingredients.initListUnit = function () {
 
 ingredients.get = function (id) {
     $.ajax({
-        url: `http://localhost:8080/api/ingredients/${id}`,
+        url: `${apiUrl}/ingredients/${id}`,
         method: "GET",
         dataType: "json",
         success: function (data) {
@@ -99,7 +99,7 @@ ingredients.save = function () {
             ingredient.unit = unitObj;
 
             $.ajax({
-                url: `http://localhost:8080/api/ingredients`,
+                url: `${apiUrl}/ingredients`,
                 method: "POST",
                 dataType: "json",
                 contentType: "application/json",
@@ -127,7 +127,7 @@ ingredients.save = function () {
             ingredient.unit = unitObj;
 
             $.ajax({
-                url: `http://localhost:8080/api/ingredients/${ingredient.id}`,
+                url: `${apiUrl}/ingredients/${ingredient.id}`,
                 method: "PUT",
                 dataType: "json",
                 contentType: "application/json",
@@ -164,7 +164,7 @@ ingredients.delete = function (id) {
         callback: function (result) {
             if (result) {
                 $.ajax({
-                    url: `http://localhost:8080/api/ingredients/${id}`,
+                    url: `${apiUrl}/ingredients/${id}`,
                     method: "DELETE",
                     dataType: "json",
                     success: function () {
@@ -197,7 +197,7 @@ ingredients.listTable = function () {
 ingredients.innitProductLineTable = function () {
     $("#unit-datatables").DataTable({
         ajax: {
-            url: `http://localhost:8080/api/units`,
+            url: `${apiUrl}/units`,
             method: "GET",
             dataType: "json",
             dataSrc: ""
@@ -226,7 +226,7 @@ ingredients.addNewUnit = function () {
 // lấy id
 units.get = function (idUnit) {
     $.ajax({
-        url: `http://localhost:8080/api/units/" + idUnit`,
+        url: `${apiUrl}/units/" + idUnit`,
         method: "GET",
         dataType: "json",
         success: function (data) {
@@ -247,7 +247,7 @@ ingredients.saveUnit = function () {
             unit.comment = $('#commentUnit').val();
 
             $.ajax({
-                url: `http://localhost:8080/api/units"`,
+                url: `${apiUrl}/units"`,
                 method: "POST",
                 dataType: "json",
                 contentType: "application/json",
@@ -266,7 +266,7 @@ ingredients.saveUnit = function () {
             unit.id = Number($('#idUnit').val());
 
             $.ajax({
-                url: `http://localhost:8080/api/units/" + unit.id`,
+                url: `${apiUrl}/units/" + unit.id`,
                 method: "PUT",
                 dataType: "json",
                 contentType: "application/json",
@@ -299,7 +299,7 @@ units.delete = function (id) {
             // console.log(id);
             if (result) {
                 $.ajax({
-                    url: `http://localhost:8080/api/units/" + id`,
+                    url: `${apiUrl}/units/" + id`,
                     method: "DELETE",
                     dataType: "json",
 

@@ -3,7 +3,7 @@ let importIngredient = {};
 importIngredient.initImportIngredients = function () {
     $("#import-ingredients-datatables").DataTable({
         ajax: {
-            url: `http://localhost:8080/api/importIngredients`,
+            url: `${apiUrl}/importIngredients`,
             method: "GET",
             dataType: "json",
             dataSrc: ""
@@ -64,7 +64,7 @@ importIngredient.resetForm =  function(){
 //show list select option
 importIngredient.initListIngredients = function(){
     $.ajax({
-        url : `http://localhost:8080/api/ingredients`,
+        url : `${apiUrl}/ingredients`,
         method : "GET",
         dataType : "json",
         success : function(data){
@@ -82,7 +82,7 @@ importIngredient.initListIngredients = function(){
 
 importIngredient.get = function (id) {
     $.ajax({
-        url: `http://localhost:8080/api/importIngredients/${id}`,
+        url: `${apiUrl}/importIngredients/${id}`,
         method: "GET",
         dataType: "json",
         success: function (data) {
@@ -115,7 +115,7 @@ importIngredient.save = function(){
             importIngredients.ingredient = ingredientObj;
 
             $.ajax({
-                url : `http://localhost:8080/api/importIngredients`,
+                url : `${apiUrl}/importIngredients`,
                 method : "POST",
                 dataType : "json",
                 contentType : "application/json",
@@ -149,7 +149,7 @@ importIngredient.save = function(){
             importIngredients.ingredient = ingredientObj;
 
             $.ajax({
-                url: `http://localhost:8080/api/importIngredients/${importIngredients.id}`,
+                url: `${apiUrl}/importIngredients/${importIngredients.id}`,
                 method: "PUT",
                 dataType: "json",
                 contentType: "application/json",
@@ -180,7 +180,7 @@ importIngredient.delete = function(id){
         callback: function (result) {
             if(result){
                 $.ajax({
-                    url : `http://localhost:8080/api/importIngredients/${id}`,
+                    url : `${apiUrl}/importIngredients/${id}`,
                     method: "DELETE",
                     dataType : "json",
                     success : function(){

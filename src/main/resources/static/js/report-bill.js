@@ -22,7 +22,7 @@ reportBills.showBills = function () {
     dateObj.dateOut = $('#test-time2').val();
     console.log(dateObj);
     $.ajax({
-        url: "http://localhost:8080/api/bills/dateExport",
+        url: `${apiUrl}/bills/dateExport`,
         method: "POST",
         dataType: "JSON",
         contentType: "application/json",
@@ -51,7 +51,7 @@ reportBills.showBills = function () {
 
 reportBills.showBillDetails = function (idOrder, dateJoinView, dateExport, totalPrice) {
     $.ajax({
-        url: "http://localhost:8080/api/billDetails/" + idOrder,
+        url: `${apiUrl}/billDetails/${idOrder}`,
         method: "GET",
         dataType: "JSON",
         success: function (data) {
