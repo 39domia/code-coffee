@@ -537,7 +537,7 @@ tables.showFormAddOrder = function (idTable) {
                                                             <th class="col-2">Đơn giá</th>
                                                             <th class="col-3 justify-content-center">Số lượng</th>
                                                             <th class="col-2">Tổng</th>
-                                                            <th class="col-1">Chức năng</th>
+                                                            <th class="col-1"></th>
                                                         </tr>
                                                     </thead>
                                                     <tbody class="" id="list-orderdetail">
