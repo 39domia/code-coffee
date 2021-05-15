@@ -11,10 +11,18 @@ importIngredient.initImportIngredients = function () {
         columns: [
             {data: "ingredient.name", name: "ingredient.name", title: "Tên nguyên liệu", orderable: true},
             {data: "dateJoin",name:"dateJoin",title: "Ngày nhập"},
-            {data: "price" , name: "price", title: "Giá"},
+            {data: "price" , name: "price", title: "Giá",
+                "render": function (data, type, row) {
+                    return `<span class="dttbl-price">${formatPrice(data)}</span>`;
+                }
+            },
             {data: "quantity", name: "quantity", title: "Số lượng"},
             {data: "ingredient.unit.name", name: "ingredient.unit.name", title: "Đơn vị"},
-            {data: "totalPrice", name: "totalPrice", title: "Tổng Giá"},
+            {data: "totalPrice", name: "totalPrice", title: "Tổng Giá",
+                "render": function (data, type, row) {
+                    return `<span class="dttbl-price">${formatPrice(data)}</span>`;
+                }
+            },
             {data: "comment", name: "comment", title: "Ghi chú"},
             {
                 data: "id", name: "action", title: "Chức năng", orderable: false,

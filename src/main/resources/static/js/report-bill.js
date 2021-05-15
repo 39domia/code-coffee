@@ -37,14 +37,14 @@ reportBills.showBills = function () {
                         <td>${v.idOrder}</td>
                         <td>${v.dateExport}</td>
                         <td>Bàn ${v.nameTable}</td>
-                        <td>${v.totalPrice}</td>
+                        <td class="text-right">${formatPrice(v.totalPrice)}</td>
                         <td>
                            <a class='mr-2' href='javascript:;' title='Thông tin chi tiết' onclick='reportBills.showBillDetails(${v.idOrder},"${v.dateJoinView}","${v.dateExport}",${v.totalPrice})' ><i class='fas fa-eye'></i></a>
                         </td>
                     </tr>`
                 )
             })
-            $('#total-revenue').html(`${total} ₫`);
+            $('#total-revenue').html(`${formatPrice(total)}`);
         }
     })
 };
@@ -71,17 +71,17 @@ reportBills.showBillDetails = function (idOrder, dateJoinView, dateExport, total
                     <td>
                         ${v.quantity}
                     </td>
-                    <td>
-                        ${v.priceEach}
+                    <td class="text-right">
+                        ${formatPrice(v.priceEach)}
                     </td>
-                    <td>
-                        ${v.quantity * v.priceEach}
+                    <td class="text-right">
+                        ${formatPrice(v.quantity * v.priceEach)}
                     </td>
                 </tr>
                 `
                 )
             });
-            $('#report-bill-totalPrice').html(`${totalPrice} đ`);
+            $('#report-bill-totalPrice').html(`${formatPrice(totalPrice)}`);
         }
     })
 };

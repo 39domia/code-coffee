@@ -111,7 +111,7 @@ areas.showMenu = function (idTable) {
                                 <div class="position-relative">
                                     <img class="card-img-top img-pd-pre" src="${p.image}" data-holder-rendered="true">
                                     <div class="card-img-overlay p-1 d-flex flex-column flex-wrap justify-content-between align-content-center bg-gra-1">
-                                        <p class="card-text text-white">Giá: ${p.price} đ</p>
+                                        <p class="card-text text-white">Giá: ${formatPrice(p.price)}</p>
                                     </div>
                                 </div>
                                 <div class="card-body">
@@ -149,7 +149,7 @@ areas.searchProduct = function (idTable) {
                                 <div class="position-relative">
                                     <img class="card-img-top img-pd-pre" src="${p.image}" data-holder-rendered="true">
                                     <div class="card-img-overlay p-1 d-flex flex-column flex-wrap justify-content-between align-content-center bg-gra-1">
-                                        <p class="card-text text-white">Giá: ${p.price} đ</p>
+                                        <p class="card-text text-white">Giá: ${formatPrice(p.price)}</p>
                                         <p class="card-text text-white">Còn lại: ${p.inventory}</p>
                                     </div>
                                 </div>
@@ -588,7 +588,7 @@ tables.reloadOrderDetail = function (idOrder, idProduct, idTable) {
                                           </div>
                                      </div>
                                 </td>
-                                <td class="d-xl-flex justify-content-xl-left align-items-xl-center col-2">${data.priceEach} đ</td>
+                                <td class="text-right col-2">${formatPrice(data.priceEach)}</td>
                                 <td class="d-xl-flex justify-content-xl-center align-items-xl-center col-3">
                                      <div class="quantity clearfix d-flex justify-content-center">
                                           <input id="quantity-left-minus" onclick="this.parentNode.querySelector('input[type=number]').stepDown();orders.showBtnQuantity(${data.product.id},${data.quantity},${data.order.id},${data.priceEach},${idTable})" type="button" value="-" class="minus btn">
@@ -596,8 +596,8 @@ tables.reloadOrderDetail = function (idOrder, idProduct, idTable) {
                                           <input id="quantity-right-plus" onclick="this.parentNode.querySelector('input[type=number]').stepUp();orders.showBtnQuantity(${data.product.id},${data.quantity},${data.order.id},${data.priceEach},${idTable})" type="button" value="+" class="plus btn">
                                      </div>
                                 </td>
-                                <td class="d-xl-flex justify-content-xl-left align-items-xl-center col-2">
-                                     <strong>${data.priceEach * data.quantity} đ</strong>
+                                <td class="text-right col-2">
+                                     <strong>${formatPrice(data.priceEach * data.quantity)}</strong>
                                 </td>
                                 <td class="d-xl-flex justify-content-xl-center align-items-xl-center col-1" id="btnCheck${data.product.id}">
                                 </td>`
@@ -814,7 +814,7 @@ orders.showOrderAndOrderDetails = function (idTable) {
                                           </div>
                                      </div>
                                 </td>
-                                <td class="d-xl-flex justify-content-xl-left align-items-xl-center col-2">${v.priceEach} đ</td>
+                                <td class="text-right col-2">${formatPrice(v.priceEach)}</td>
                                 <td class="d-xl-flex justify-content-xl-center align-items-xl-center col-3">
                                      <div class="quantity clearfix d-flex justify-content-center">
                                           <input id="quantity-left-minus" onclick="this.parentNode.querySelector('input[type=number]').stepDown();orders.showBtnQuantity(${v.product.id},${v.quantity},${v.order.id},${v.priceEach},${idTable})" type="button" value="-" class="minus btn">
@@ -822,8 +822,8 @@ orders.showOrderAndOrderDetails = function (idTable) {
                                           <input id="quantity-right-plus" onclick="this.parentNode.querySelector('input[type=number]').stepUp();orders.showBtnQuantity(${v.product.id},${v.quantity},${v.order.id},${v.priceEach},${idTable})" type="button" value="+" class="plus btn">
                                      </div>
                                 </td>
-                                <td class="d-xl-flex justify-content-xl-left align-items-xl-center col-2">
-                                     <strong>${v.priceEach * v.quantity} đ</strong>
+                                <td class="text-right col-2">
+                                     <strong>${formatPrice(v.priceEach * v.quantity)}</strong>
                                 </td>
                                 <td class="d-xl-flex justify-content-xl-center align-items-xl-center col-1" id="btnCheck${v.product.id}">
                                 </td>

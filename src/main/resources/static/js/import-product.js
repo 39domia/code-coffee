@@ -13,8 +13,17 @@ importProducts.initImportProductTable = function () {
             {data: "product.name", name: "product.name", title: "Tên sản phẩm", orderable: true},
             {data: "dateJoin", name: "dateJoin", title: "Ngày nhập"},
             {data: "quantity", name: "quantity", title: "Số lượng"},
-            {data: "price", name: "price", title: "Giá"},
-            {data: "totalPrice", name: "totalPrice", title: "Tổng giá"},
+            {
+                data: "price", name: "price", title: "Giá",
+                "render": function (data, type, row) {
+                    return `<span class="dttbl-price">${formatPrice(data)}</span>`;
+                }
+            },
+            {data: "totalPrice", name: "totalPrice", title: "Tổng giá",
+                "render": function (data, type, row) {
+                    return `<span class="dttbl-price">${formatPrice(data)}</span>`;
+                }
+            },
             {data: "comment", name: "comment", title: "ghi chú"},
             {
                 data: "id", name: "action", title: "Chức năng", orderable: false,
