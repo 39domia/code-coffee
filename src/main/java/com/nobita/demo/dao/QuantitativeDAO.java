@@ -54,9 +54,9 @@ public class QuantitativeDAO implements BaseDAO<Quantitative> {
         return false;
     }
 
-    public boolean deleteByIdProductAndIdIngredient(Long idProduct,Long idIngredient){
-        String sql="delete from quantitative where id_product =? and id_ingredient =?";
-        Object[] values={idProduct,idIngredient};
-        return jdbcTemplate.update(sql,values) > 0;
+    public boolean deleteByIdProductAndIdIngredient(Long idProduct, Long idIngredient) {
+        String sql = "delete from quantitative where id_product =? and id_ingredient =?";
+        Object[] values = {idProduct, idIngredient};
+        return jdbcTemplate.update(sql, values) > 0;
     }
 }

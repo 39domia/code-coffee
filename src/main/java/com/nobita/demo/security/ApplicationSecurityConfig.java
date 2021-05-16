@@ -26,24 +26,24 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity https) throws Exception {
-        https   .csrf().disable()
+        https.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/","/products","/importProducts","/ingredients","/importingredients").hasAuthority("ADMIN")
+                .antMatchers("/", "/products", "/importProducts", "/ingredients", "/importingredients", "/reports", "/quantitative").hasAuthority("ADMIN")
                 .antMatchers("/order").hasAnyAuthority("ORDER", "ADMIN")
                 .and()
                 .formLogin()
                 .loginPage("/login")
                 .usernameParameter("username")
                 .passwordParameter("password")
-                .defaultSuccessUrl("/order",true)
+                .defaultSuccessUrl("/order", true)
                 .failureUrl("/login?error=true")
                 .and()
                 .rememberMe()
-                    .tokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(21))
-                    .key("something very secured")
-                    .rememberMeParameter("remember-me")
-                    .and()
-                    .exceptionHandling().accessDeniedPage("/Access_Denied")
+                .tokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(21))
+                .key("something very secured")
+                .rememberMeParameter("remember-me")
+                .and()
+                .exceptionHandling().accessDeniedPage("/Access_Denied")
                 .and()
                 .logout()
                 .logoutUrl("/logout")
@@ -55,7 +55,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception{
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsServiceImpl).passwordEncoder(bCryptPasswordEncoder());
     }
 }
