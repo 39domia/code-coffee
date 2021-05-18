@@ -6,6 +6,12 @@
     <title>Trang chủ - code-coffee</title>
     <th:block th:replace="layout/link.html :: headerLink">
     </th:block>
+    <style>
+        #chartdiv {
+            width: 100%;
+            height: 500px;
+        }
+    </style>
 </head>
 
 <body id="page-top">
@@ -33,25 +39,25 @@
             <div class="container-fluid">
                 <input type="hidden" id="datetime-hidden-1"/>
                 <input type="hidden" id="datetime-hidden-2"/>
-<!--                <div class="row">-->
-<!--                    <div class="col-2">-->
-<!--                        <select id="time-select-1" onchange="pickMonth()" class="custom-select">-->
-<!--                            <option selected>Chọn tháng</option>-->
-<!--                            <option value="1">Tháng 1</option>-->
-<!--                            <option value="2">Tháng 2</option>-->
-<!--                            <option value="3">Tháng 3</option>-->
-<!--                            <option value="4">Tháng 4</option>-->
-<!--                            <option value="5">Tháng 5</option>-->
-<!--                            <option value="6">Tháng 6</option>-->
-<!--                            <option value="7">Tháng 7</option>-->
-<!--                            <option value="8">Tháng 8</option>-->
-<!--                            <option value="9">Tháng 9</option>-->
-<!--                            <option value="10">Tháng 10</option>-->
-<!--                            <option value="11">Tháng 11</option>-->
-<!--                            <option value="12">Tháng 12</option>-->
-<!--                        </select>-->
-<!--                    </div>-->
-<!--                </div>-->
+                <!--                <div class="row">-->
+                <!--                    <div class="col-2">-->
+                <!--                        <select id="time-select-1" onchange="pickMonth()" class="custom-select">-->
+                <!--                            <option selected>Chọn tháng</option>-->
+                <!--                            <option value="1">Tháng 1</option>-->
+                <!--                            <option value="2">Tháng 2</option>-->
+                <!--                            <option value="3">Tháng 3</option>-->
+                <!--                            <option value="4">Tháng 4</option>-->
+                <!--                            <option value="5">Tháng 5</option>-->
+                <!--                            <option value="6">Tháng 6</option>-->
+                <!--                            <option value="7">Tháng 7</option>-->
+                <!--                            <option value="8">Tháng 8</option>-->
+                <!--                            <option value="9">Tháng 9</option>-->
+                <!--                            <option value="10">Tháng 10</option>-->
+                <!--                            <option value="11">Tháng 11</option>-->
+                <!--                            <option value="12">Tháng 12</option>-->
+                <!--                        </select>-->
+                <!--                    </div>-->
+                <!--                </div>-->
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                     <h1 class="h3 mb-0 text-gray-800">Trang chủ</h1>
@@ -61,8 +67,6 @@
 
                 <!-- Content Row -->
                 <div class="row">
-
-
 
 
                     <!-- Earnings (Monthly) Card Example -->
@@ -157,78 +161,79 @@
 
                 <div class="row">
 
-                    <!-- Area Chart -->
-                    <!--                    <div class="col-xl-8 col-lg-7">-->
-                    <!--                        <div class="card shadow mb-4">-->
-                    <!--                            &lt;!&ndash; Card Header - Dropdown &ndash;&gt;-->
-                    <!--                            <div-->
-                    <!--                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">-->
-                    <!--                                <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>-->
-                    <!--                                <div class="dropdown no-arrow">-->
-                    <!--                                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"-->
-                    <!--                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
-                    <!--                                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>-->
-                    <!--                                    </a>-->
-                    <!--                                    <div class="dropdown-menu dropdown-menu-right shadow animated&#45;&#45;fade-in"-->
-                    <!--                                         aria-labelledby="dropdownMenuLink">-->
-                    <!--                                        <div class="dropdown-header">Dropdown Header:</div>-->
-                    <!--                                        <a class="dropdown-item" href="#">Action</a>-->
-                    <!--                                        <a class="dropdown-item" href="#">Another action</a>-->
-                    <!--                                        <div class="dropdown-divider"></div>-->
-                    <!--                                        <a class="dropdown-item" href="#">Something else here</a>-->
-                    <!--                                    </div>-->
-                    <!--                                </div>-->
-                    <!--                            </div>-->
-                    <!--                            &lt;!&ndash; Card Body &ndash;&gt;-->
-                    <!--                            <div class="card-body">-->
-                    <!--                                <div class="chart-area">-->
-                    <!--                                    <canvas id="myAreaChart"></canvas>-->
-                    <!--                                </div>-->
-                    <!--                            </div>-->
-                    <!--                        </div>-->
-                    <!--                    </div>-->
+                    <!--                    Area Chart-->
+                    <div class="col-xl-8 col-lg-7">
+                        <div class="card shadow mb-4">
+                            <!-- Card Header - Dropdown -->
+                            <div
+                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                <h6 class="m-0 font-weight-bold text-primary">Doanh thu</h6>
+                                <!--                                <div class="dropdown no-arrow">-->
+                                <!--                                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"-->
+                                <!--                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+                                <!--                                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>-->
+                                <!--                                    </a>-->
+                                <!--                                    <div class="dropdown-menu dropdown-menu-right shadow animated&#45;&#45;fade-in"-->
+                                <!--                                         aria-labelledby="dropdownMenuLink">-->
+                                <!--                                        <div class="dropdown-header">Dropdown Header:</div>-->
+                                <!--                                        <a class="dropdown-item" href="#">Action</a>-->
+                                <!--                                        <a class="dropdown-item" href="#">Another action</a>-->
+                                <!--                                        <div class="dropdown-divider"></div>-->
+                                <!--                                        <a class="dropdown-item" href="#">Something else here</a>-->
+                                <!--                                    </div>-->
+                                <!--                                </div>-->
+                            </div>
+                            <!-- Card Body -->
+                            <div class="card-body">
+                                <!--                                <div class="chart-area">-->
+                                <!--                                    <canvas id="myAreaChart"></canvas>-->
+                                <div id="chartdiv"></div>
+                                <!--                                </div>-->
+                            </div>
+                        </div>
+                    </div>
 
-                    <!-- Pie Chart -->
-                    <!--                    <div class="col-xl-4 col-lg-5">-->
-                    <!--                        <div class="card shadow mb-4">-->
-                    <!--                            &lt;!&ndash; Card Header - Dropdown &ndash;&gt;-->
-                    <!--                            <div-->
-                    <!--                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">-->
-                    <!--                                <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>-->
-                    <!--                                <div class="dropdown no-arrow">-->
-                    <!--                                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"-->
-                    <!--                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
-                    <!--                                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>-->
-                    <!--                                    </a>-->
-                    <!--                                    <div class="dropdown-menu dropdown-menu-right shadow animated&#45;&#45;fade-in"-->
-                    <!--                                         aria-labelledby="dropdownMenuLink">-->
-                    <!--                                        <div class="dropdown-header">Dropdown Header:</div>-->
-                    <!--                                        <a class="dropdown-item" href="#">Action</a>-->
-                    <!--                                        <a class="dropdown-item" href="#">Another action</a>-->
-                    <!--                                        <div class="dropdown-divider"></div>-->
-                    <!--                                        <a class="dropdown-item" href="#">Something else here</a>-->
-                    <!--                                    </div>-->
-                    <!--                                </div>-->
-                    <!--                            </div>-->
-                    <!--                            &lt;!&ndash; Card Body &ndash;&gt;-->
-                    <!--                            <div class="card-body">-->
-                    <!--                                <div class="chart-pie pt-4 pb-2">-->
-                    <!--                                    <canvas id="myPieChart"></canvas>-->
-                    <!--                                </div>-->
-                    <!--                                <div class="mt-4 text-center small">-->
-                    <!--                                        <span class="mr-2">-->
-                    <!--                                            <i class="fas fa-circle text-primary"></i> Direct-->
-                    <!--                                        </span>-->
-                    <!--                                    <span class="mr-2">-->
-                    <!--                                            <i class="fas fa-circle text-success"></i> Social-->
-                    <!--                                        </span>-->
-                    <!--                                    <span class="mr-2">-->
-                    <!--                                            <i class="fas fa-circle text-info"></i> Referral-->
-                    <!--                                        </span>-->
-                    <!--                                </div>-->
-                    <!--                            </div>-->
-                    <!--                        </div>-->
-                    <!--                    </div>-->
+                    <!--                     Pie Chart -->
+                    <div class="col-xl-4 col-lg-5">
+                        <div class="card shadow mb-4">
+                            <!-- Card Header - Dropdown -->
+                            <div
+                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
+                                <!--                                <div class="dropdown no-arrow">-->
+                                <!--                                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"-->
+                                <!--                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+                                <!--                                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>-->
+                                <!--                                    </a>-->
+                                <!--                                    <div class="dropdown-menu dropdown-menu-right shadow animated&#45;&#45;fade-in"-->
+                                <!--                                         aria-labelledby="dropdownMenuLink">-->
+                                <!--                                        <div class="dropdown-header">Dropdown Header:</div>-->
+                                <!--                                        <a class="dropdown-item" href="#">Action</a>-->
+                                <!--                                        <a class="dropdown-item" href="#">Another action</a>-->
+                                <!--                                        <div class="dropdown-divider"></div>-->
+                                <!--                                        <a class="dropdown-item" href="#">Something else here</a>-->
+                                <!--                                    </div>-->
+                                <!--                                </div>-->
+                            </div>
+                            <!-- Card Body -->
+                            <div class="card-body">
+                                <div class="chart-pie pt-4 pb-2">
+                                    <canvas id="myPieChart"></canvas>
+                                </div>
+                                <div class="mt-4 text-center small">
+                                    <span class="mr-2">
+                                        <i class="fas fa-circle text-primary"></i> Direct
+                                    </span>
+                                    <span class="mr-2">
+                                        <i class="fas fa-circle text-success"></i> Social
+                                    </span>
+                                    <span class="mr-2">
+                                        <i class="fas fa-circle text-info"></i> Referral
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Content Row -->
@@ -407,7 +412,6 @@
 </a>
 
 
-
 <th:block th:replace="layout/link.html :: scriptImport">
 </th:block>
 <script>
@@ -422,6 +426,11 @@
         console.log(`t2 ${$('#datetime-hidden-2').val()}`);
     }
 </script>
+
+<script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+<script src="/js/amChart-demo.js"></script>
 </body>
 
 </html>

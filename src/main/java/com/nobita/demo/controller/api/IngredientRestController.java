@@ -30,6 +30,15 @@ public class IngredientRestController {
         return new ResponseEntity<List<Ingredient>>(HttpStatus.NO_CONTENT);
     }
 
+    @GetMapping(value = "/not-quantitative-product/{idProduct}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> findAllNotQuantitativeProduct(@PathVariable("idProduct") Long idProduct) {
+        List<Ingredient> ingredients = ingredientService.findAllNotQuantitativeProduct(idProduct);
+        if (!ingredients.isEmpty()) {
+            return new ResponseEntity<>(ingredients, HttpStatus.OK);
+        }
+        return new ResponseEntity<List<Ingredient>>(HttpStatus.NO_CONTENT);
+    }
+
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> get(@PathVariable("id") Long id) {
         Ingredient ingredient = ingredientService.findByID(id);

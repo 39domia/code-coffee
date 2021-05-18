@@ -170,7 +170,8 @@
                                     </div>
                                     <div class="col-9">
                                         <select class="form-control" name="productNameQuantitative"
-                                                id="productNameQuantitative"></select>
+                                                id="productNameQuantitative" onchange="quantitative.selectProductRenderIngredients()">
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="row form-group">
@@ -179,7 +180,9 @@
                                     </div>
                                     <div class="col-9">
                                         <select class="form-control" name="ingredientNameQuantitative"
-                                                id="ingredientNameQuantitative"></select>
+                                                id="ingredientNameQuantitative">
+                                            <option value="" selected disabled hidden>- Chọn nguyên liệu -</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="row form-group">

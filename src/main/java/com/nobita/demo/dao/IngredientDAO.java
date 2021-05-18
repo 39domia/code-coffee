@@ -19,6 +19,13 @@ public class IngredientDAO implements BaseDAO<com.nobita.demo.model.Ingredient> 
         return jdbcTemplate.query(sql, new IngredientResultSet());
     }
 
+    // lấy tất cả các Nguyên liệu không có định mức theo Sản phẩm
+    public List<com.nobita.demo.model.Ingredient> findAllNotQuantitativeProduct (Long idProduct) {
+        String sql = "select i.* ,u.name as name_unit from ingredient i left join unit u on u.id=i.id_unit where i.deleted = 0 and i.id not in (select id_ingredient from quantitative where id_product = ?) ";
+        Object[] values = {idProduct};
+        return jdbcTemplate.query(sql, new IngredientRowMapper(), values);
+    }
+
     @Override
     public com.nobita.demo.model.Ingredient findByID(Long id) {
         String sql = "select i.* ,u.name as name_unit from ingredient i left join unit u on u.id=i.id_unit where i.id = ? and i.deleted = 0";

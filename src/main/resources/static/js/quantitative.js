@@ -52,24 +52,22 @@ quantitative.initProductsAndIngredients = function () {
         dataType: "json",
         success: function (data) {
             $('#productNameQuantitative').empty();
+            $('#productNameQuantitative').append(
+                `
+                <option value="" selected disabled hidden>- Chọn sản phẩm -</option>
+                `
+            );
             $.each(data, function (i, v) {
                 $('#productNameQuantitative').append(
                     "<option value='" + v.id + "'>" + v.name + "</option>"
                 );
             });
-        }
-    });
-    $.ajax({
-        url: `${apiUrl}/ingredients`,
-        method: "GET",
-        dataType: "json",
-        success: function (data) {
             $('#ingredientNameQuantitative').empty();
-            $.each(data, function (i, v) {
-                $('#ingredientNameQuantitative').append(
-                    "<option value='" + v.id + "'>" + v.name + "</option>"
-                );
-            });
+            $('#ingredientNameQuantitative').append(
+                `
+                <option value="" selected disabled hidden>- Chọn nguyên liệu -</option>
+                `
+            );
         }
     });
 };
@@ -78,12 +76,42 @@ quantitative.addNew = function () {
     $('#formAddEditQuantitative')[0].reset();
     $('#modalTitleQuantitative').html("Thêm định mức sản phẩm mới");
     quantitative.resetForm();
-    $('#modalAddEditQuantitative').modal('show')
+    $('#ingredientNameQuantitative').attr("disabled", true);
+    $('#modalAddEditQuantitative').modal('show');
 }
 
 quantitative.resetForm = function () {
     $('#formAddEditQuantitative')[0].reset();
 };
+
+quantitative.selectProductRenderIngredients = function () {
+    let idProduct = $('#productNameQuantitative').val();
+    $.ajax({
+        url: `${apiUrl}/ingredients/not-quantitative-product/${idProduct}`,
+        method: "GET",
+        dataType: "json",
+        success: function (data) {
+            $('#ingredientNameQuantitative').attr("disabled", false);
+            $('#ingredientNameQuantitative').empty();
+            $('#ingredientNameQuantitative').append(
+                `
+                <option value="" selected disabled hidden>- Chọn nguyên liệu -</option>
+                `
+            );
+            $.each(data, function (i, v) {
+                $('#ingredientNameQuantitative').append(
+                    `
+                    <option value="${v.id}">${v.name}</option>
+                    `
+                );
+            });
+        },
+        error: function () {
+            toastr.error("Lỗi tìm sản phẩm");
+        }
+    })
+};
+
 
 quantitative.findProductById = function (idProduct,quantitativeAddObj) {
     $.ajax({

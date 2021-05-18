@@ -19,6 +19,10 @@ public class IngredientServiceImpl implements IngredientService {
         return ingredientDAO.findAll();
     }
 
+    public List<Ingredient> findAllNotQuantitativeProduct(Long idProduct) {
+        return ingredientDAO.findAllNotQuantitativeProduct(idProduct);
+    }
+
     @Override
     public Ingredient findByID(Long id) {
         return ingredientDAO.findByID(id);
