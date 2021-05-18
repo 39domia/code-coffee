@@ -1,0 +1,40 @@
+package com.service.impl;
+
+import com.dao.UnitDAO;
+import com.model.Unit;
+import com.service.UnitService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+@Service
+public class UnitServiceImpl implements UnitService {
+
+    @Autowired
+    private UnitDAO unitDAO;
+
+    @Override
+    public List<Unit> findAll() {
+        return unitDAO.findAll();
+    }
+
+    @Override
+    public Unit findByID(Long id) {
+        return unitDAO.findByID(id);
+    }
+
+    @Override
+    public boolean save(Unit unit) {
+        return unitDAO.save(unit);
+    }
+
+    @Override
+    public boolean update(Unit unit) {
+        return unitDAO.update(unit);
+    }
+
+    @Override
+    public boolean delete(Long id) {
+        return unitDAO.delete(id);
+    }
+}

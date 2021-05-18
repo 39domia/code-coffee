@@ -33,7 +33,7 @@
 
                 <!-- Page Heading -->
                 <div class="d-flex justify-content-between mb-4">
-                    <h1 class=" h3 mb-2 text-gray-800 ">Quản lý sản phẩm</h1>
+                    <h1 class=" h3 mb-2 text-gray-800 ">Quản lý định mức</h1>
                     <div class="d-flex">
                         <a href="javascript:;" onclick="quantitative.addNew()"
                            class="btn btn-outline-primary btn-icon-split">
@@ -169,8 +169,10 @@
                                         <label>Sản phẩm</label>
                                     </div>
                                     <div class="col-9">
+                                        <input type="hidden" id="productIdQuantitative">
                                         <select class="form-control" name="productNameQuantitative"
-                                                id="productNameQuantitative"></select>
+                                                id="productNameQuantitative" onchange="quantitative.selectProductRenderIngredients()">
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="row form-group">
@@ -178,8 +180,11 @@
                                         <label>Nguyên liệu</label>
                                     </div>
                                     <div class="col-9">
+                                        <input type="hidden" id="ingredientIdQuantitative">
                                         <select class="form-control" name="ingredientNameQuantitative"
-                                                id="ingredientNameQuantitative"></select>
+                                                id="ingredientNameQuantitative">
+                                            <option value="" selected disabled hidden>- Chọn nguyên liệu -</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="row form-group">
@@ -187,8 +192,8 @@
                                         <label>Định mức</label>
                                     </div>
                                     <div class="col-9">
-                                        <input class="form-control" type="number" step="0.01"
-                                               name="quantityQuantitative" id="quantityQuantitative"
+                                        <input class="form-control" type="number" step="0.005"
+                                               id="quantityQuantitative"
                                                data-rule-required=true>
                                     </div>
                                 </div>
@@ -196,7 +201,7 @@
                         </div>
                         <!-- Modal footer -->
                         <div class="modal-footer">
-                            <button class="btn btn-primary" onclick="quantitative.save()">Lưu</button>
+                            <button class="btn btn-primary" onclick="quantitative.addOrUpdate()">Lưu</button>
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
                         </div>
                     </div>
@@ -289,6 +294,8 @@
         <!-- End of Main Content -->
 
         <!-- Footer -->
+        <th:block th:replace="layout/credit.html :: credit">
+        </th:block>
         <!-- End of Footer -->
 
     </div>
@@ -301,26 +308,6 @@
 <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
 </a>
-
-<!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Bạn thực sự muốn rời đi?</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">Chọn đăng xuất để kết thúc phiên làm việc</div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Hủy bỏ</button>
-                <a class="btn btn-primary" href="/login">Đăng xuất</a>
-            </div>
-        </div>
-    </div>
-</div>
 
 
 <th:block th:replace="layout/link.html :: scriptImport">

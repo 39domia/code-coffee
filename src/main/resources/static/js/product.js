@@ -1,9 +1,9 @@
 let products = {};
 let productLines = {};
 
-let productExports={};
+let productExports = {};
 
-let billDetails={};
+let billDetails = {};
 
 products.initProductTable = function () {
     $("#products-datatables").DataTable({
@@ -30,7 +30,13 @@ products.initProductTable = function () {
                     } else return data;
                 }
             },
-            {data: "price", name: "price", title: "Giá"},
+            {
+                data: "price", name: "price", title: "Giá",
+                "render": function (data, type, row) {
+                    return `<span class="dttbl-price">${formatPrice(data)}</span>`;
+                }
+
+            },
             {data: "productLine.name", name: "productLine.name", title: "Dòng sản phẩm"},
             {
                 data: "productStatus", name: "productStatus", title: "Trạng thái",
@@ -66,6 +72,10 @@ products.initProductTable = function () {
     });
 }
 
+function formatPrice(price) {
+    $(".dttbl-price").parent().css("text-align", "right");
+    return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND'}).format(price);
+}
 
 products.renderProductStatusButton = function (data, row) {
     if (data === "OUT_OF_STOCK") {
@@ -143,34 +153,34 @@ products.updateProduct = function (product, id) {
     })
 }
 
-productExports.update=function (nameProduct,idProduct){
-    let productExportObj={};
-    productExportObj.idProduct=idProduct;
-    productExportObj.nameProduct=nameProduct;
+productExports.update = function (nameProduct, idProduct) {
+    let productExportObj = {};
+    productExportObj.idProduct = idProduct;
+    productExportObj.nameProduct = nameProduct;
     console.log(productExportObj);
     $.ajax({
-        url:`${apiUrl}/productExports/${idProduct}`,
-        method:"PUT",
+        url: `${apiUrl}/productExports/${idProduct}`,
+        method: "PUT",
         dataType: "json",
         contentType: "application/json",
         data: JSON.stringify(productExportObj),
-        success:function (data){
+        success: function (data) {
         }
     })
 }
 
-billDetails.update=function (nameProduct,idProduct){
-    let billDetailsObj={};
-    billDetailsObj.idProduct=idProduct;
-    billDetailsObj.nameProduct=nameProduct;
+billDetails.update = function (nameProduct, idProduct) {
+    let billDetailsObj = {};
+    billDetailsObj.idProduct = idProduct;
+    billDetailsObj.nameProduct = nameProduct;
     console.log(billDetailsObj);
     $.ajax({
-        url:`${apiUrl}/billDetails/${idProduct}`,
-        method:"PUT",
+        url: `${apiUrl}/billDetails/${idProduct}`,
+        method: "PUT",
         dataType: "json",
         contentType: "application/json",
         data: JSON.stringify(billDetailsObj),
-        success:function (data){
+        success: function (data) {
             console.log("vao r")
         }
     })
@@ -282,7 +292,7 @@ products.addNew = function () {
     $('#modalTitle').html("Thêm sản phẩm mới");
     products.resetForm();
     $('#isIngredient').prop("disabled", false);
-    $('#isIngredient option:selected').html("Nguyên liệu pha chế");
+    $('#isIngredient option:selected').html("Sản phẩm tự pha chế");
     $('#modalAddEdit').modal('show')
 }
 
@@ -323,10 +333,10 @@ products.delete = function (id) {
         message: "Bạn có muốn xóa sản phẩm này?",
         buttons: {
             cancel: {
-                label: '<i class="fa fa-times"></i> No'
+                label: '<i class="fa fa-times"></i> Nghĩ lại'
             },
             confirm: {
-                label: '<i class="fa fa-check"></i> Yes'
+                label: '<i class="fa fa-check"></i> Có'
             }
         },
         callback: function (result) {
@@ -398,8 +408,8 @@ products.get = function (id) {
 
 products.renderIsIngredient = function (product) {
     if (product.ingredient) {
-        return `Nguyên liệu pha chế`;
-    } else return `Nguyên liệu thông thường`;
+        return `Sản phẩm tự pha chế`;
+    } else return `Sản phẩm đóng gói`;
 }
 
 products.setProductStatus = function (inventory, product) {
@@ -503,8 +513,8 @@ products.save = function () {
                     toastr.success("Cập nhật thành công")
                     $('#modalAddEdit').modal('hide');
                     $("#products-datatables").DataTable().ajax.reload();
-                    productExports.update(productObj.name,productObj.id);
-                    billDetails.update(productObj.name,productObj.id);
+                    productExports.update(productObj.name, productObj.id);
+                    billDetails.update(productObj.name, productObj.id);
                 },
                 error: function () {
                     console.log('loi update')
@@ -599,7 +609,7 @@ productLines.delete = function (data) {
                     url: `${apiUrl}/productLines/${data}`,
                     method: "DELETE",
                     dataType: "json",
-                    succes: function () {
+                    success: function () {
                         toastr.success("Xóa thành công");
                         $('#modalAddEditProductLine').modal('hide');
                         $("#productLines-datatables").DataTable().ajax.reload();

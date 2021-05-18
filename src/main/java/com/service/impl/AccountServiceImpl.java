@@ -1,0 +1,51 @@
+package com.service.impl;
+
+import com.dao.AccountDAO;
+import com.model.Account;
+import com.service.AccountService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class AccountServiceImpl implements AccountService {
+
+    @Autowired
+    private AccountDAO accountDAO;
+
+    @Override
+    public List<Account> findAll() {
+        return accountDAO.findAll();
+    }
+
+    @Override
+    public Account findByID(Long id) {
+        return accountDAO.findByID(id);
+    }
+
+    @Override
+    public boolean save(Account account) {
+        return accountDAO.save(account);
+    }
+
+    @Override
+    public boolean update(Account account) {
+        return accountDAO.update(account);
+    }
+
+    @Override
+    public boolean delete(Long id) {
+        return accountDAO.delete(id);
+    }
+
+    @Override
+    public Account findByUsername(String username) {
+        return accountDAO.findByUsername(username);
+    }
+
+//    @Override
+//    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+//        return new MyAccountDetails(s);
+//    }
+}
