@@ -37,7 +37,7 @@ public class BillDetailsRestController {
         }
     }
 
-    @GetMapping(value = "/{idOrder}/quantitativeExports",produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/{idOrder}/quantitativeExports",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getQuantitativeExport(@PathVariable("idOrder") Long idOrder){
         List<QuantitativeExport> quantitativeExports=billDetailsService.getQuantitativeExport(idOrder);
         return new ResponseEntity<>(quantitativeExports,HttpStatus.OK);

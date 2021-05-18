@@ -1014,6 +1014,7 @@ bills.doAddBillDetails = function (arr, idOrder, idTable) {
             contentType: "application/json",
             data: JSON.stringify(v),
             success: function (data) {
+
             }
         })
     })
@@ -1021,11 +1022,15 @@ bills.doAddBillDetails = function (arr, idOrder, idTable) {
 }
 
 bills.addQuantitativeExport=function (idOrder,idTable){
+    console.log(idOrder);
+    console.log(idTable);
     $.ajax({
-        url:`${apiUrl}/billDetails/${idOrder}/quantitativeExports`,
-        method:"GET",
+        url:`${apiUrl}/billDetails/${idOrder}/quantitativeExports`  ,
+        method:"POST",
         dataType:"JSON",
         success:function (data){
+            console.log("du lieu");
+            console.log(data);
             $.each(data,function (i,v){
                 $.ajax({
                     url:`${apiUrl}/quantitativeExports/`,
@@ -1050,7 +1055,6 @@ bills.addProductExport=function (idOrder,idTable){
         success:function (data){
             console.log(data);
             $.each(data,function (i,v){
-                console.log(v);
                 $.ajax({
                     url:`${apiUrl}/productExports/`,
                     method:"POST",
