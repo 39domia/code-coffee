@@ -169,6 +169,7 @@
                                         <label>Sản phẩm</label>
                                     </div>
                                     <div class="col-9">
+                                        <input type="hidden" id="productIdQuantitative">
                                         <select class="form-control" name="productNameQuantitative"
                                                 id="productNameQuantitative" onchange="quantitative.selectProductRenderIngredients()">
                                         </select>
@@ -179,6 +180,7 @@
                                         <label>Nguyên liệu</label>
                                     </div>
                                     <div class="col-9">
+                                        <input type="hidden" id="ingredientIdQuantitative">
                                         <select class="form-control" name="ingredientNameQuantitative"
                                                 id="ingredientNameQuantitative">
                                             <option value="" selected disabled hidden>- Chọn nguyên liệu -</option>
@@ -190,8 +192,8 @@
                                         <label>Định mức</label>
                                     </div>
                                     <div class="col-9">
-                                        <input class="form-control" type="number" step="0.01"
-                                               name="quantityQuantitative" id="quantityQuantitative"
+                                        <input class="form-control" type="number" step="0.005"
+                                               id="quantityQuantitative"
                                                data-rule-required=true>
                                     </div>
                                 </div>
@@ -199,7 +201,7 @@
                         </div>
                         <!-- Modal footer -->
                         <div class="modal-footer">
-                            <button class="btn btn-primary" onclick="quantitative.save()">Lưu</button>
+                            <button class="btn btn-primary" onclick="quantitative.addOrUpdate()">Lưu</button>
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
                         </div>
                     </div>

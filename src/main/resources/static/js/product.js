@@ -333,10 +333,10 @@ products.delete = function (id) {
         message: "Bạn có muốn xóa sản phẩm này?",
         buttons: {
             cancel: {
-                label: '<i class="fa fa-times"></i> No'
+                label: '<i class="fa fa-times"></i> Nghĩ lại'
             },
             confirm: {
-                label: '<i class="fa fa-check"></i> Yes'
+                label: '<i class="fa fa-check"></i> Có'
             }
         },
         callback: function (result) {
@@ -609,7 +609,7 @@ productLines.delete = function (data) {
                     url: `${apiUrl}/productLines/${data}`,
                     method: "DELETE",
                     dataType: "json",
-                    succes: function () {
+                    success: function () {
                         toastr.success("Xóa thành công");
                         $('#modalAddEditProductLine').modal('hide');
                         $("#productLines-datatables").DataTable().ajax.reload();
