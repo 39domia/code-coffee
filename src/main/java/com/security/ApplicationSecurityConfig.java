@@ -45,7 +45,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .key("something very secured")
                 .rememberMeParameter("remember-me")
                 .and()
-                .exceptionHandling().accessDeniedPage("/Access_Denied")
+                .exceptionHandling().accessDeniedPage("/403")
                 .and()
                 .logout()
                 .logoutUrl("/logout")
