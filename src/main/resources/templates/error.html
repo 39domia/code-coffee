@@ -3,15 +3,10 @@
 
 
 <head>
-    <title>Trang chủ - code-coffee</title>
+    <title>404 - code-coffee</title>
     <th:block th:replace="layout/link.html :: headerLink">
     </th:block>
-    <style>
-        #chartdiv {
-            width: 100%;
-            height: 500px;
-        }
-    </style>
+
 </head>
 
 <body id="page-top">
@@ -69,23 +64,7 @@
 
 <th:block th:replace="layout/link.html :: scriptImport">
 </th:block>
-<script>
 
-    function pickMonth() {
-        let monthPicked = $('#time-select-1').val();
-        let dayOfMonth = moment(`${moment().year()}-${monthPicked}`, "YYYY-MM").daysInMonth();
-        $('#datetime-hidden-1').val(`${moment().year()}-${monthPicked}-1 00:00:00`);
-        $('#datetime-hidden-2').val(`${moment().year()}-${monthPicked}-${dayOfMonth} 23:59:59`);
-        console.log(`crt ${monthPicked}`);
-        console.log(`t1 ${$('#datetime-hidden-1').val()}`);
-        console.log(`t2 ${$('#datetime-hidden-2').val()}`);
-    }
-</script>
-
-<script src="https://cdn.amcharts.com/lib/4/core.js"></script>
-<script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
-<script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
-<script src="/js/amChart-demo.js"></script>
 </body>
 
 </html>
