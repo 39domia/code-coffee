@@ -28,9 +28,9 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity https) throws Exception {
         https.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/", "/products", "/importProducts", "/ingredients", "/importingredients", "/reports", "/quantitative")
+                .antMatchers("/", "/products/**", "/importProducts/**", "/ingredients/**", "/importingredients/**", "/reports/**", "/quantitative/**")
                 .hasAuthority("ADMIN")
-                .antMatchers("/order")
+                .antMatchers("/order/**")
                 .hasAnyAuthority("ORDER", "ADMIN")
                 .and()
                 .formLogin()
