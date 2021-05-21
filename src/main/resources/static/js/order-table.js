@@ -15,24 +15,24 @@ areas.initAreas = function () {
         dataType: "json",
         success: function (data) {
             $('#area-sql').empty();
-            $('#showOrdersTables').empty().append(
+            $('#showOrdersTables').append(
                 `<div class="col mt-5">
-                            <div class="d-xl-flex align-items-xl-start">
-                                <ul class="nav nav-pills text-capitalize border rounded-0 d-xl-flex flex-column shadow" id="area-sql"></ul>
-                                <div class="tab-content shadow">
-                                    <div class="tab-pane fade show active card" role="tabpanel" id="tab">
-                                        <div class="col d-flex flex-wrap pt-4 pb-4" id="tables-sql">
-                                        </div>
-                                    </div>
+                    <div class="d-xl-flex align-items-xl-start">
+                        <ul class="nav nav-pills text-capitalize border rounded-0 d-xl-flex flex-column shadow" id="area-sql"></ul>
+                        <div class="tab-content shadow">
+                            <div class="tab-pane fade show active card" role="tabpanel" id="tab">
+                                <div class="col d-flex flex-wrap pt-4 pb-4" id="tables-sql">
                                 </div>
                             </div>
-                        </div>`
+                        </div>
+                    </div>
+                </div>`
             );
             $.each(data, function (i, v) {
                 $('#area-sql').append(
                     `<li class="nav-item w-100px">
-                            <a class="nav-link" id="area-${v.id}" role="tab" data-toggle="pill" href="#tab" onclick="areas.showTables(${v.id})">${v.name}</a>
-                        </li>`
+                        <a class="nav-link" id="area-${v.id}" role="tab" data-toggle="pill" href="#tab" onclick="areas.showTables(${v.id})">${v.name}</a>
+                    </li>`
                 );
             });
             $("#area-1").click();

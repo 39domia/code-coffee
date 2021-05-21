@@ -18,7 +18,7 @@ public class BillDetailsRestController {
     @Autowired
     BillDetailsService billDetailsService;
 
-    @GetMapping(value = "/{idOrder}",produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/{idOrder}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> list(@PathVariable("idOrder") Long idOrder) {
         List<BillDetail> billDetails = billDetailsService.findByIdOrder(idOrder);
         if (!billDetails.isEmpty()) {
@@ -37,24 +37,24 @@ public class BillDetailsRestController {
         }
     }
 
-    @GetMapping(value = "/{idOrder}/quantitativeExports",produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> getQuantitativeExport(@PathVariable("idOrder") Long idOrder){
-        List<QuantitativeExport> quantitativeExports=billDetailsService.getQuantitativeExport(idOrder);
-        return new ResponseEntity<>(quantitativeExports,HttpStatus.OK);
+    @GetMapping(value = "/{idOrder}/quantitativeExports", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getQuantitativeExport(@PathVariable("idOrder") Long idOrder) {
+        List<QuantitativeExport> quantitativeExports = billDetailsService.getQuantitativeExport(idOrder);
+        return new ResponseEntity<>(quantitativeExports, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/{idOrder}/productExports",produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> getProductExport(@PathVariable("idOrder") Long idOrder){
-        List<ProductExport> productExports=billDetailsService.getProductExport(idOrder);
-        return new ResponseEntity<>(productExports,HttpStatus.OK);
+    @GetMapping(value = "/{idOrder}/productExports", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getProductExport(@PathVariable("idOrder") Long idOrder) {
+        List<ProductExport> productExports = billDetailsService.getProductExport(idOrder);
+        return new ResponseEntity<>(productExports, HttpStatus.OK);
     }
 
-    @PutMapping(value = "/{idProduct}",produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> update(@RequestBody BillDetail billDetail){
-        try{
+    @PutMapping(value = "/{idProduct}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> update(@RequestBody BillDetail billDetail) {
+        try {
             billDetailsService.update(billDetail);
-            return new ResponseEntity<>(billDetail,HttpStatus.OK);
-        }catch (Exception e ){
+            return new ResponseEntity<>(billDetail, HttpStatus.OK);
+        } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
