@@ -546,7 +546,12 @@ tables.showFormAddOrder = function (idTable) {
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col d-xl-flex justify-content-xl-center align-items-xl-center mb-3">
+                                    <div class="row bd-t font-weight-bold py-2">
+                                        <div class="col-6">Tổng cộng:</div>
+                                        <div class="col-5 text-right"><span id="total-price-all"></span></div>
+                                        <div class="col-1"></div>
+                                    </div>
+                                    <div class="col d-xl-flex justify-content-xl-center align-items-xl-center bd-t pt-3">
                                         <a href="javascript:;" data-toggle="modal" data-target="#addOrderDetailModal"
                                             class="d-xl-flex justify-content-xl-center align-items-xl-center"
                                             style="  border-radius: 50%;  border: 2px solid;  width: 50px;  height: 50px; "
@@ -800,8 +805,10 @@ orders.showOrderAndOrderDetails = function (idTable) {
                 method: "GET",
                 dataType: "JSON",
                 success: function (data) {
+                    let totalPriceAll = 0;
                     $('#list-orderdetail').empty();
                     $.each(data, function (i, v) {
+                        totalPriceAll += v.totalPrice;
                         $('#list-orderdetail').append(
                             `<tr class="row" id="showDetail${v.order.id}and${v.product.id}">
                                 <td class="d-xl-flex justify-content-xl-center align-items-xl-center order-item-trash col-1" onclick="orders.removeOrderDetail(${v.order.id},${v.product.id},${idTable})">
@@ -830,6 +837,8 @@ orders.showOrderAndOrderDetails = function (idTable) {
                             </tr>`
                         )
                     })
+                    $('#total-price-all').empty();
+                    $('#total-price-all').html(formatPrice(totalPriceAll));
                 }
             })
         }
@@ -851,7 +860,6 @@ orders.showBtnQuantity = function (idProduct, quantity, idOrder, priceEach, idTa
 }
 
 orders.updateQuantity = function (idProduct, quantityUpdate, idOrder, priceEach, idTable, quantityBefore) {
-    console.log("vao update");
     let orderObj = {};
     orderObj.id = idOrder;
     let productObj = {};
