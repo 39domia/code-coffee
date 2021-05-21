@@ -49,6 +49,16 @@ public class BillServiceImpl implements BillService {
     }
 
     @Override
+    public Bill sumTotalPriceAll() {
+        return billDAO.sumTotalPriceAll();
+    }
+
+    @Override
+    public Bill countBills() {
+        return billDAO.countBills();
+    }
+
+    @Override
     public boolean deleteByIdOrder(Long idOrder) {
         return billDAO.deleteByIdOrder(idOrder);
     }

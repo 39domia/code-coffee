@@ -39,6 +39,16 @@ public class BillDAO implements BaseDAO<Bill> {
         return jdbcTemplate.queryForObject(sql, new BillRowMapper(), values);
     }
 
+    public Bill sumTotalPriceAll() {
+        String sql = "SELECT id_order, date_join, date_export, name_table, sum(total_price) as total_price FROM bill;";
+        return jdbcTemplate.queryForObject(sql, new BillRowMapper());
+    }
+
+    public Bill countBills() {
+        String sql = "SELECT id_order, date_join, date_export, name_table, count(id_order) as total_price FROM bill;";
+        return jdbcTemplate.queryForObject(sql, new BillRowMapper());
+    }
+
     @Override
     public boolean save(Bill bill) {
         String sql = "insert into bill(id_order,date_join,name_table,total_price) values(?,?,?,?)";

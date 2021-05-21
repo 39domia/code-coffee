@@ -36,4 +36,22 @@ public class BillRestController {
             return new ResponseEntity<Bill>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping(value = "/totalRevenue")
+    public ResponseEntity<?> totalRevenue(){
+        Bill bill = billService.sumTotalPriceAll();
+        if (bill != null) {
+            return new ResponseEntity<>(bill, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping(value = "/countBills")
+    public ResponseEntity<?> countBills(){
+        Bill bill = billService.countBills();
+        if (bill != null) {
+            return new ResponseEntity<>(bill, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }
