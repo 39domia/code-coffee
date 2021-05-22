@@ -23,6 +23,11 @@ public class BillDetailsDAO implements BaseDAO<BillDetail> {
         return jdbcTemplate.query(sql, new BillDetailsResultSet());
     }
 
+    public List<BillDetail> topSellLimit() {
+        String sql = "SELECT id_order, name_product, sum(quantity) as quantity, price_each, id_product FROM billdetail group by id_product order by quantity desc limit 9;";
+        return jdbcTemplate.query(sql, new BillDetailsResultSet());
+    }
+
     @Override
     public BillDetail findByID(Long id) {
         return null;

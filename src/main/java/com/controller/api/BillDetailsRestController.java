@@ -27,6 +27,16 @@ public class BillDetailsRestController {
         return new ResponseEntity<List<BillDetail>>(HttpStatus.NO_CONTENT);
     }
 
+    @GetMapping(value = "/topSell",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> topSellLimit() {
+        List<BillDetail> billDetails = billDetailsService.topSellLimit();
+        if (!billDetails.isEmpty()) {
+            return new ResponseEntity<>(billDetails, HttpStatus.OK);
+        }
+        return new ResponseEntity<List<BillDetail>>(HttpStatus.NO_CONTENT);
+    }
+
+
     @PostMapping
     public ResponseEntity<?> save(@RequestBody BillDetail billDetail) {
         try {

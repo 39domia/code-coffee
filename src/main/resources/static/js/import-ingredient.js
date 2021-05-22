@@ -63,6 +63,8 @@ importIngredient.addNew = function(){
 importIngredient.resetForm =  function(){
     $('#formAddEditIngredients')[0].reset();
     $('#nameIngredients').val('');
+    $('#err-price').html('');
+    $('#err-quantity').html('');
     $('#productCode').val('');
     $('#price').val('');
     $('#quantity').val('');
@@ -136,7 +138,6 @@ importIngredient.save = function(){
 
                 },
                 error: function (data){
-                    // valid price
                     $('#err-price').html(data.responseJSON.price);
                     $('#err-quantity').html(data.responseJSON.quantity);
 

@@ -57,6 +57,11 @@ public class BillDetailsServiceImpl implements BillDetailsService {
     }
 
     @Override
+    public List<BillDetail> topSellLimit() {
+        return billDetailsDAO.topSellLimit();
+    }
+
+    @Override
     public boolean deleteByIdOrder(Long idOrder) {
         return billDetailsDAO.deleteByIdOrder(idOrder);
     }

@@ -21,6 +21,8 @@ public class Account  implements UserDetails {
     private String username;
 
     private String password;
+    private String image;
+    private String fullName;
 
     private Authorization authorization;
 

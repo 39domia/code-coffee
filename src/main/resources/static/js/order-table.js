@@ -208,17 +208,17 @@ tables.showFormAddTable = function (idArea) {
     )
 }
 
-tables.showFormEditTable = function (idArea,idTable) {
-    let commentValue="";
+tables.showFormEditTable = function (idArea, idTable) {
+    let commentValue = "";
     $.ajax({
-        url:`${apiUrl}/tables/${idTable}`,
-        method:"GET",
-        dataType:"JSON",
-        success:function (data){
-            if(data.comment != null){
-                commentValue=data.comment;
-            }else {
-                commentValue="";
+        url: `${apiUrl}/tables/${idTable}`,
+        method: "GET",
+        dataType: "JSON",
+        success: function (data) {
+            if (data.comment != null) {
+                commentValue = data.comment;
+            } else {
+                commentValue = "";
             }
             $('#showOrder').remove();
             $('#showTables').remove();
@@ -275,26 +275,26 @@ function changeBtn(idArea) {
     }
 }
 
-function changeBtnEdit(idArea,idTable){
+function changeBtnEdit(idArea, idTable) {
     $.ajax({
-        url:`${apiUrl}/tables/${idTable}`,
-        method:"GET",
-        dataType:"JSON",
-        success:function (data){
-            let nameEdit =$('#name').val();
-            let commentEdit=$('#comment').val();
-            if(nameEdit === ""){
-                nameEdit=data.name;
+        url: `${apiUrl}/tables/${idTable}`,
+        method: "GET",
+        dataType: "JSON",
+        success: function (data) {
+            let nameEdit = $('#name').val();
+            let commentEdit = $('#comment').val();
+            if (nameEdit === "") {
+                nameEdit = data.name;
             }
-            if(commentEdit === ""){
-                commentEdit =data.comment;
+            if (commentEdit === "") {
+                commentEdit = data.comment;
             }
-            if (nameEdit != data.name || commentEdit != data.comment){
+            if (nameEdit != data.name || commentEdit != data.comment) {
                 $('#btnEdit').empty().append(
                     `<button class="btn btn-success col" type="button" onclick="tables.editTable(${idArea},${idTable})">Cập
                 nhật</button>`
                 )
-            }else {
+            } else {
                 $('#btnEdit').empty().append(
                     `<button class="btn btn-success col" type="button" onclick="tables.editTable(${idArea})" disabled>Cập
                 nhật</button>`
@@ -346,22 +346,22 @@ tables.addTable = function (idArea) {
     })
 }
 
-tables.editTable=function (idArea,idTable){
-    let tableObj={};
-    let areaObj={};
-    areaObj.id=idArea
-    tableObj.id=idTable;
-    tableObj.name=$('#name').val();
-    tableObj.area=areaObj;
-    tableObj.comment=$('#comment').val();
+tables.editTable = function (idArea, idTable) {
+    let tableObj = {};
+    let areaObj = {};
+    areaObj.id = idArea
+    tableObj.id = idTable;
+    tableObj.name = $('#name').val();
+    tableObj.area = areaObj;
+    tableObj.comment = $('#comment').val();
     console.log(tableObj);
     $.ajax({
-        url:`${apiUrl}/tables/${idTable}`,
-        method:"PUT",
+        url: `${apiUrl}/tables/${idTable}`,
+        method: "PUT",
         dataType: "JSON",
         contentType: "application/json",
         data: JSON.stringify(tableObj),
-        success:function (data){
+        success: function (data) {
             Command: toastr["success"]("Sửa bàn thành công");
             toastr.options = {
                 "closeButton": false,
@@ -390,12 +390,12 @@ tables.editTable=function (idArea,idTable){
     })
 }
 
-tables.checkTable=function (idArea,idTable){
+tables.checkTable = function (idArea, idTable) {
     $.ajax({
-        url:`${apiUrl}/tables/${idTable}/order`,
-        method:"GET",
-        dataType:"JSON",
-        success:function (data){
+        url: `${apiUrl}/tables/${idTable}/order`,
+        method: "GET",
+        dataType: "JSON",
+        success: function (data) {
             Swal.fire({
                 position: 'center',
                 icon: 'error',
@@ -404,18 +404,18 @@ tables.checkTable=function (idArea,idTable){
                 timer: 1500
             })
         },
-        error:function (){
-            tables.removeTable(idArea,idTable);
+        error: function () {
+            tables.removeTable(idArea, idTable);
         }
     })
 }
 
-tables.removeTable=function (idArea,idTable){
+tables.removeTable = function (idArea, idTable) {
     $.ajax({
-        url:`${apiUrl}/tables/${idTable}`,
-        method:"DELETE",
-        dataType:"JSON",
-        success:function (){
+        url: `${apiUrl}/tables/${idTable}`,
+        method: "DELETE",
+        dataType: "JSON",
+        success: function () {
             Swal.fire({
                 position: 'center',
                 icon: 'success',
@@ -546,7 +546,12 @@ tables.showFormAddOrder = function (idTable) {
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col d-xl-flex justify-content-xl-center align-items-xl-center mb-3">
+                                    <div class="row bd-t font-weight-bold py-2">
+                                        <div class="col-6">Tổng cộng:</div>
+                                        <div class="col-5 text-right"><span id="total-price-all"></span></div>
+                                        <div class="col-1"></div>
+                                    </div>
+                                    <div class="col d-xl-flex justify-content-xl-center align-items-xl-center bd-t pt-3">
                                         <a href="javascript:;" data-toggle="modal" data-target="#addOrderDetailModal"
                                             class="d-xl-flex justify-content-xl-center align-items-xl-center"
                                             style="  border-radius: 50%;  border: 2px solid;  width: 50px;  height: 50px; "
@@ -800,8 +805,10 @@ orders.showOrderAndOrderDetails = function (idTable) {
                 method: "GET",
                 dataType: "JSON",
                 success: function (data) {
+                    let totalPriceAll = 0;
                     $('#list-orderdetail').empty();
                     $.each(data, function (i, v) {
+                        totalPriceAll += v.totalPrice;
                         $('#list-orderdetail').append(
                             `<tr class="row" id="showDetail${v.order.id}and${v.product.id}">
                                 <td class="d-xl-flex justify-content-xl-center align-items-xl-center order-item-trash col-1" onclick="orders.removeOrderDetail(${v.order.id},${v.product.id},${idTable})">
@@ -830,6 +837,8 @@ orders.showOrderAndOrderDetails = function (idTable) {
                             </tr>`
                         )
                     })
+                    $('#total-price-all').empty();
+                    $('#total-price-all').html(formatPrice(totalPriceAll));
                 }
             })
         }
@@ -851,7 +860,6 @@ orders.showBtnQuantity = function (idProduct, quantity, idOrder, priceEach, idTa
 }
 
 orders.updateQuantity = function (idProduct, quantityUpdate, idOrder, priceEach, idTable, quantityBefore) {
-    console.log("vao update");
     let orderObj = {};
     orderObj.id = idOrder;
     let productObj = {};
@@ -957,31 +965,42 @@ orders.removeOrder = function (idOrder, idTable) {
 }
 
 bills.addBill = function (idTable) {
-    $.ajax({
-        url: `${apiUrl}/tables/${idTable}/order`,
-        method: "GET",
-        dataType: "JSON",
-        success: function (data) {
-            let billObj = {};
-            billObj.idOrder = data.id;
-            billObj.dateJoin = data.dateJoin;
-            billObj.nameTable = data.table.name;
-            billObj.totalPrice = data.totalAllPrice;
+    Swal.fire({
+        title: 'Bạn chắc chắn muốn thanh toán?',
+        showCancelButton: true,
+        confirmButtonText: `Thanh toán`,
+        cancelButtonText: `Hủy bỏ`
+    }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
             $.ajax({
-                url: `${apiUrl}/bills/`,
-                method: "POST",
+                url: `${apiUrl}/tables/${idTable}/order`,
+                method: "GET",
                 dataType: "JSON",
-                contentType: "application/json",
-                data: JSON.stringify(billObj),
-                success: function (dataBill) {
-                    bills.addBillDetail(data.id, idTable);
-                },
-                error: function () {
-                    bills.addBillDetail(billObj.idOrder, idTable);
+                success: function (data) {
+                    let billObj = {};
+                    billObj.idOrder = data.id;
+                    billObj.dateJoin = data.dateJoin;
+                    billObj.nameTable = data.table.name;
+                    billObj.totalPrice = data.totalAllPrice;
+                    $.ajax({
+                        url: `${apiUrl}/bills/`,
+                        method: "POST",
+                        dataType: "JSON",
+                        contentType: "application/json",
+                        data: JSON.stringify(billObj),
+                        success: function (dataBill) {
+                            bills.addBillDetail(data.id, idTable);
+                        },
+                        error: function () {
+                            bills.addBillDetail(billObj.idOrder, idTable);
+                        }
+                    })
                 }
             })
         }
     })
+
 }
 
 bills.addBillDetail = function (idOrder, idTable) {
@@ -997,7 +1016,7 @@ bills.addBillDetail = function (idOrder, idTable) {
                 billDetailObj.nameProduct = v.product.name;
                 billDetailObj.quantity = v.quantity;
                 billDetailObj.priceEach = v.priceEach;
-                billDetailObj.idProduct=v.product.id;
+                billDetailObj.idProduct = v.product.id;
                 arr.push(billDetailObj);
             })
             bills.doAddBillDetails(arr, idOrder, idTable);
@@ -1017,22 +1036,22 @@ bills.doAddBillDetails = function (arr, idOrder, idTable) {
             }
         })
     })
-    bills.addQuantitativeExport(idOrder,idTable);
+    bills.addQuantitativeExport(idOrder, idTable);
 }
 
-bills.addQuantitativeExport=function (idOrder,idTable){
+bills.addQuantitativeExport = function (idOrder, idTable) {
     $.ajax({
-        url:`${apiUrl}/billDetails/${idOrder}/quantitativeExports`,
-        method:"GET",
-        dataType:"JSON",
-        success:function (data){
-            $.each(data,function (i,v){
+        url: `${apiUrl}/billDetails/${idOrder}/quantitativeExports`,
+        method: "GET",
+        dataType: "JSON",
+        success: function (data) {
+            $.each(data, function (i, v) {
                 $.ajax({
-                    url:`${apiUrl}/quantitativeExports/`,
-                    method:"POST",
+                    url: `${apiUrl}/quantitativeExports/`,
+                    method: "POST",
                     contentType: "application/json",
                     data: JSON.stringify(v),
-                    success:function (data){
+                    success: function (data) {
                         console.log("vao quantitative");
                     }
                 })
@@ -1042,67 +1061,67 @@ bills.addQuantitativeExport=function (idOrder,idTable){
     bills.addProductExport(idOrder, idTable);
 }
 
-bills.addProductExport=function (idOrder,idTable){
+bills.addProductExport = function (idOrder, idTable) {
     $.ajax({
-        url:`${apiUrl}/billDetails/${idOrder}/productExports`,
-        method :"GET",
-        dataType:"JSON",
-        success:function (data){
+        url: `${apiUrl}/billDetails/${idOrder}/productExports`,
+        method: "GET",
+        dataType: "JSON",
+        success: function (data) {
             console.log(data);
-            $.each(data,function (i,v){
+            $.each(data, function (i, v) {
                 console.log(v);
                 $.ajax({
-                    url:`${apiUrl}/productExports/`,
-                    method:"POST",
+                    url: `${apiUrl}/productExports/`,
+                    method: "POST",
                     contentType: "application/json",
                     data: JSON.stringify(v),
-                    success:function (data){
+                    success: function (data) {
                         console.log("vao product")
                     }
                 })
             })
         }
     })
-    bills.getBillDetails(idOrder,idTable);
+    bills.getBillDetails(idOrder, idTable);
 }
 
-bills.getBillDetails=function (idOrder,idTable){
+bills.getBillDetails = function (idOrder, idTable) {
     $.ajax({
-        url:`${apiUrl}/billDetails/${idOrder}`,
-        method:"GET",
-        dataType:"JSON",
-        success:function (data){
-            $.each(data,function (i,v){
-                bills.checkProduct(v.idProduct,v.quantity);
+        url: `${apiUrl}/billDetails/${idOrder}`,
+        method: "GET",
+        dataType: "JSON",
+        success: function (data) {
+            $.each(data, function (i, v) {
+                bills.checkProduct(v.idProduct, v.quantity);
             })
         }
     })
-    bills.removeAllOrderDetails(idOrder,idTable)
+    bills.removeAllOrderDetails(idOrder, idTable)
 }
 
-bills.checkProduct=function (idProduct,quantityOrder){
+bills.checkProduct = function (idProduct, quantityOrder) {
     $.ajax({
-        url:`${apiUrl}/products/${idProduct}`,
-        method:"GET",
-        dataType:"JSON",
-        success:function (data){
-            if(data.ingredient === false){
-                bills.updateInventory(data.inventory,idProduct,quantityOrder);
+        url: `${apiUrl}/products/${idProduct}`,
+        method: "GET",
+        dataType: "JSON",
+        success: function (data) {
+            if (data.ingredient === false) {
+                bills.updateInventory(data.inventory, idProduct, quantityOrder);
             }
         }
     })
 }
 
-bills.updateInventory=function (inventoryCurrent,idProduct,quantityOrder){
-    let productObj={};
-    productObj.inventory=inventoryCurrent-quantityOrder;
-    productObj.id=idProduct;
+bills.updateInventory = function (inventoryCurrent, idProduct, quantityOrder) {
+    let productObj = {};
+    productObj.inventory = inventoryCurrent - quantityOrder;
+    productObj.id = idProduct;
     $.ajax({
-        url:`${apiUrl}/products/${idProduct}/inventory`,
-        method:"PUT",
+        url: `${apiUrl}/products/${idProduct}/inventory`,
+        method: "PUT",
         contentType: "application/json",
         data: JSON.stringify(productObj),
-        success:function (data){
+        success: function (data) {
         }
     })
 
