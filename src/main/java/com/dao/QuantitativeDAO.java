@@ -1,7 +1,9 @@
 package com.dao;
 
 import com.model.Quantitative;
+import com.model.dto.QuantitativeDTO;
 import com.resultset.QuantitativeResultSet;
+import com.rowmapper.QuantitativeDTORowMapper;
 import com.rowmapper.QuantitativeRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -58,5 +60,10 @@ public class QuantitativeDAO implements BaseDAO<Quantitative> {
         String sql = "delete from quantitative where id_product =? and id_ingredient =?";
         Object[] values = {idProduct, idIngredient};
         return jdbcTemplate.update(sql, values) > 0;
+    }
+
+    public QuantitativeDTO getQuantitative(){
+        String sql="select sum(ii.import_quantity) as quantity_import,coalesce((select sum(qe.quantity) from quantitative_export qe),0) as quantity_export from import_ingredient ii";
+        return (QuantitativeDTO) jdbcTemplate.query(sql,new QuantitativeDTORowMapper());
     }
 }

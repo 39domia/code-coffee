@@ -63,6 +63,9 @@ importIngredient.addNew = function(){
 importIngredient.resetForm =  function(){
     $('#formAddEditIngredients')[0].reset();
     $('#nameIngredients').val('');
+    $('#err-quantity-import-ingredients').html('');
+    $('#err-name-import-ingredients').html('');
+    $('#err-price-import-ingredients').html('');
     $('#productCode').val('');
     $('#price').val('');
     $('#quantity').val('');
@@ -136,10 +139,9 @@ importIngredient.save = function(){
 
                 },
                 error: function (data){
-                    // valid price
-                    $('#err-price').html(data.responseJSON.price);
-                    $('#err-quantity').html(data.responseJSON.quantity);
-
+                    $('#err-quantity-import-ingredients').html(data.responseJSON.quantity);
+                    $('#err-name-import-ingredients').html(data.responseJSON.name);
+                    $('#err-price-import-ingredients').html(data.responseJSON.price);
                 }
             });
         }
