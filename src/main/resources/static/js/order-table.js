@@ -15,7 +15,7 @@ areas.initAreas = function () {
         dataType: "json",
         success: function (data) {
             $('#area-sql').empty();
-            $('#showOrdersTables').empty().append(
+            $('#showOrdersTables').append(
                 `<div class="col mt-5">
                     <div class="d-xl-flex align-items-xl-start">
                         <ul class="nav nav-pills text-capitalize border rounded-0 d-xl-flex flex-column shadow" id="area-sql"></ul>
