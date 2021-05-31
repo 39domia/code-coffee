@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ReportController {
     @GetMapping
     public String showReportPage() {
-        return "/report";
+        return "report";
     }
 
     @GetMapping(value = "/bills")
@@ -19,7 +19,7 @@ public class ReportController {
 
     @GetMapping(value = "/inventories")
     public String showReportStore() {
-        return "/report-inventory";
+        return "report-inventory";
     }
 
     @GetMapping(value = "/ingredients")
