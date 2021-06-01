@@ -1037,10 +1037,11 @@ bills.doAddBillDetails = function (arr, idOrder, idTable) {
             }
         })
     })
-    bills.addQuantitativeExport(idOrder, idTable);
+    bills.addQuantitativeExport(idOrder);
+    bills.addProductExport(idOrder, idTable);
 }
 
-bills.addQuantitativeExport = function (idOrder, idTable) {
+bills.addQuantitativeExport = function (idOrder) {
     $.ajax({
         url: `${apiUrl}/billDetails/${idOrder}/quantitativeExports`,
         method: "GET",
@@ -1059,7 +1060,6 @@ bills.addQuantitativeExport = function (idOrder, idTable) {
             })
         }
     })
-    bills.addProductExport(idOrder, idTable);
 }
 
 bills.addProductExport = function (idOrder, idTable) {
