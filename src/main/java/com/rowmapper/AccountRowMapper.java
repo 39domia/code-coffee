@@ -14,6 +14,8 @@ public class AccountRowMapper implements RowMapper<Account> {
         account.setId(rs.getLong("id"));
         account.setUsername(rs.getString("username"));
         account.setPassword(rs.getString("password"));
+        account.setImage(rs.getString("image"));
+        account.setFullName(rs.getString("fullname"));
         account.setAuthorization(Authorization.valueOf(rs.getString("authorization")));
         return account;
     }
