@@ -483,8 +483,9 @@ products.save = function () {
                     $('#modalAddEdit').modal('hide');
                     $("#products-datatables").DataTable().ajax.reload();
                 },
-                error: function () {
-                    toastr.error("Lỗi thêm sản phẩm");
+                error: function (data) {
+                    $('#name-product').html(data.responseJSON.name);
+                    $('#price-product').html(data.responseJSON.price);
                 }
             });
         } else {
