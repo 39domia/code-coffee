@@ -61,7 +61,8 @@ importProducts.addNew = function () {
 importProducts.resetForm = function () {
     $('#formAddEdit')[0].reset();
     $('#product.name').val('');
-    $('#err-quantity-product').html('');
+    $('#err-price-import-product').html('');
+    $('#err-quantity-import-product').html('');
     $('#err-price-product').html('');
     $('#quantity').val('');
     $('#price').val('');
@@ -143,8 +144,9 @@ importProducts.save = function () {
 
                         },
                         error: function (data) {
+                            $('#err-quantity-import-product').html(data.responseJSON.quantity);
+                            $('#err-price-import-product').html(data.responseJSON.quantity);
                             $('#err-price-product').html(data.responseJSON.price);
-                            $('#err-quantity-product').html(data.responseJSON.quantity);
                         }
                     });
                 }

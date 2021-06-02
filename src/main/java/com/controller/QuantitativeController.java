@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping(value = "quantitative")
+@RequestMapping(value = "/quantitative")
 public class QuantitativeController {
 
     @GetMapping

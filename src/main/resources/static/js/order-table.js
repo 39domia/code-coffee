@@ -1033,18 +1033,21 @@ bills.doAddBillDetails = function (arr, idOrder, idTable) {
             contentType: "application/json",
             data: JSON.stringify(v),
             success: function (data) {
+
             }
         })
     })
-    bills.addQuantitativeExport(idOrder, idTable);
+    bills.addQuantitativeExport(idOrder);
+    bills.addProductExport(idOrder, idTable);
 }
 
-bills.addQuantitativeExport = function (idOrder, idTable) {
+bills.addQuantitativeExport = function (idOrder) {
     $.ajax({
         url: `${apiUrl}/billDetails/${idOrder}/quantitativeExports`,
-        method: "GET",
+        method: "POST", 
         dataType: "JSON",
         success: function (data) {
+            console.log("du lieu quantitative:"+ data );
             $.each(data, function (i, v) {
                 $.ajax({
                     url: `${apiUrl}/quantitativeExports/`,
@@ -1058,7 +1061,6 @@ bills.addQuantitativeExport = function (idOrder, idTable) {
             })
         }
     })
-    bills.addProductExport(idOrder, idTable);
 }
 
 bills.addProductExport = function (idOrder, idTable) {
@@ -1069,7 +1071,6 @@ bills.addProductExport = function (idOrder, idTable) {
         success: function (data) {
             console.log(data);
             $.each(data, function (i, v) {
-                console.log(v);
                 $.ajax({
                     url: `${apiUrl}/productExports/`,
                     method: "POST",

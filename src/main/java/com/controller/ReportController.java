@@ -5,11 +5,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping(value = "/reports")
+@RequestMapping(value = "reports")
 public class ReportController {
     @GetMapping
     public String showReportPage() {
-        return "/report";
+        return "report";
     }
 
     @GetMapping(value = "/bills")
@@ -19,7 +19,7 @@ public class ReportController {
 
     @GetMapping(value = "/inventories")
     public String showReportStore() {
-        return "/report-inventory";
+        return "report-inventory";
     }
 
     @GetMapping(value = "/ingredients")
