@@ -461,7 +461,7 @@ products.save = function () {
             productObj.name = $('#productName').val();
             productObj.price = Number($('#price').val());
             productObj.image = $('#imgUrl').val();
-            productObj.ingredient = Boolean($('#isIngredient').val()) === true;
+            productObj.ingredient = $('#isIngredient').val() === 'true';
             productObj.inventory = 0;
             productObj.inventory = products.setInventory(productObj);
             productObj.productStatus = products.setProductStatus(productObj.inventory, productObj);
