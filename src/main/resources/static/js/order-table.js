@@ -975,6 +975,7 @@ bills.addBill = function (idTable) {
         if (result.isConfirmed) {
             $.ajax({
                 url: `${apiUrl}/tables/${idTable}/order`,
+                async: false,
                 method: "GET",
                 dataType: "JSON",
                 success: function (data) {
@@ -985,6 +986,7 @@ bills.addBill = function (idTable) {
                     billObj.totalPrice = data.totalAllPrice;
                     $.ajax({
                         url: `${apiUrl}/bills/`,
+                        async: false,
                         method: "POST",
                         dataType: "JSON",
                         contentType: "application/json",
@@ -1007,6 +1009,7 @@ bills.addBillDetail = function (idOrder, idTable) {
     let arr = [];
     $.ajax({
         url: `${apiUrl}/orders/${idOrder}/orderDetails`,
+        async: false,
         method: "GET",
         dataType: "JSON",
         success: function (data) {
@@ -1028,6 +1031,7 @@ bills.doAddBillDetails = function (arr, idOrder, idTable) {
     $.each(arr, function (i, v) {
         $.ajax({
             url: `${apiUrl}/billDetails/`,
+            async: false,
             method: "POST",
             dataType: "JSON",
             contentType: "application/json",
@@ -1044,10 +1048,11 @@ bills.doAddBillDetails = function (arr, idOrder, idTable) {
 bills.addQuantitativeExport = function (idOrder) {
     $.ajax({
         url: `${apiUrl}/billDetails/${idOrder}/quantitativeExports`,
-        method: "POST", 
+        async: false,
+        method: "POST",
         dataType: "JSON",
         success: function (data) {
-            console.log("du lieu quantitative:"+ data );
+            console.log("du lieu quantitative:" + data);
             $.each(data, function (i, v) {
                 $.ajax({
                     url: `${apiUrl}/quantitativeExports/`,
@@ -1066,6 +1071,7 @@ bills.addQuantitativeExport = function (idOrder) {
 bills.addProductExport = function (idOrder, idTable) {
     $.ajax({
         url: `${apiUrl}/billDetails/${idOrder}/productExports`,
+        async: false,
         method: "GET",
         dataType: "JSON",
         success: function (data) {
@@ -1089,6 +1095,7 @@ bills.addProductExport = function (idOrder, idTable) {
 bills.getBillDetails = function (idOrder, idTable) {
     $.ajax({
         url: `${apiUrl}/billDetails/${idOrder}`,
+        async: false,
         method: "GET",
         dataType: "JSON",
         success: function (data) {
@@ -1103,6 +1110,7 @@ bills.getBillDetails = function (idOrder, idTable) {
 bills.checkProduct = function (idProduct, quantityOrder) {
     $.ajax({
         url: `${apiUrl}/products/${idProduct}`,
+        async: false,
         method: "GET",
         dataType: "JSON",
         success: function (data) {
@@ -1119,6 +1127,7 @@ bills.updateInventory = function (inventoryCurrent, idProduct, quantityOrder) {
     productObj.id = idProduct;
     $.ajax({
         url: `${apiUrl}/products/${idProduct}/inventory`,
+        async: false,
         method: "PUT",
         contentType: "application/json",
         data: JSON.stringify(productObj),
@@ -1131,6 +1140,7 @@ bills.updateInventory = function (inventoryCurrent, idProduct, quantityOrder) {
 bills.removeAllOrderDetails = function (idOrder, idTable) {
     $.ajax({
         url: `${apiUrl}/orders/${idOrder}/orderDetails`,
+        async: false,
         method: "DELETE",
         dataType: "JSON",
         success: function (data) {
