@@ -65,7 +65,7 @@ public class ProductRestController {
     }
 
     @PostMapping
-    public ResponseEntity<?> save(@Valid @RequestBody Product product, BindingResult result, HttpServletRequest request) throws IOException {
+    public ResponseEntity<?> save(@Valid @RequestBody Product product, BindingResult result) throws IOException {
         if (result.hasErrors()){
             List<FieldError> fieldErrors = result.getFieldErrors();
             Map<String, String> errors = new HashMap<>();

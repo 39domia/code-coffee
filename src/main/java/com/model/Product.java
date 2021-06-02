@@ -18,7 +18,7 @@ public class Product {
 
     private Long inventory;
 
-    @Min(value = 0,message = "Giá sản phẩm không thể bé hơn 0")
+    @Min(value = 1,message = "Giá sản phẩm không thể bé hơn 0")
     private Long price;
     private ProductLine productLine;
 
