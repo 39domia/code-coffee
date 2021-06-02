@@ -1044,9 +1044,10 @@ bills.doAddBillDetails = function (arr, idOrder, idTable) {
 bills.addQuantitativeExport = function (idOrder) {
     $.ajax({
         url: `${apiUrl}/billDetails/${idOrder}/quantitativeExports`,
-        method: "GET",
+        method: "POST", 
         dataType: "JSON",
         success: function (data) {
+            console.log("du lieu quantitative:"+ data );
             $.each(data, function (i, v) {
                 $.ajax({
                     url: `${apiUrl}/quantitativeExports/`,
