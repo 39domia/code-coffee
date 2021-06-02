@@ -61,6 +61,7 @@ reportBills.showBillDetails = function (idOrder, dateJoinView, dateExport, total
             $('#report-bill-dateJoin').html(dateJoinView);
             $('#report-bill-dateExport').html(dateExport);
             $('#modalReportBillView').modal("show");
+            $('#report-bill-table').empty();
             $.each(data, function (i, v) {
                 $('#report-bill-table').append(
                     `
