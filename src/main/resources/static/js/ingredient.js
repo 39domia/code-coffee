@@ -85,7 +85,7 @@ ingredients.get = function (id) {
 };
 
 
-// and and save ingredient
+// save and update ingredient
 ingredients.save = function () {
     if ($('#modalSaveIngredient')) {
         if (!$('#idIngredient').val()) {

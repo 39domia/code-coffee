@@ -148,8 +148,21 @@ dashboard.showCompletedBills = function () {
     })
 }
 
+function cache_clear() {
+    window.location.reload(true)
+}
 
 $(document).ready(function () {
+    setInterval(function () {
+        dashboard.showTopSell();
+        dashboard.pickMonth();
+        dashboard.showEarningMonthly();
+        dashboard.showTotalRevenue();
+        dashboard.showCompletedBills();
+    },3000);
+    setInterval(function (){
+        dashboard.showEarningMonthlyBar();
+    },20000)
     dashboard.showTopSell();
     dashboard.pickMonth();
     dashboard.showEarningMonthly();
