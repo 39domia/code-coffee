@@ -12,7 +12,7 @@
 
   
 
-## Document và Backlog
+## Document
 
 [PowerPoint](https://drive.google.com/file/d/1Vf5SpzjGbb9mDhjgXrbpGwYEQjaMAcSy/view?usp=sharing)
 
